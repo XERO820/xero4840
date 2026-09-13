@@ -50,10 +50,1260 @@ body{font-family:'Rajdhani',sans-serif;background:var(--bg);color:var(--text);ov
   background:linear-gradient(135deg,var(--pink),var(--yellow));box-shadow:0 0 12px var(--pink);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.7}}
 @keyframes shine{to{background-position:400% 0}}
+<div id="progress"></div>
+<canvas id="bg-canvas"></canvas>
+<canvas id="particles"></canvas>
+<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>.nav-links{display:flex;align-items:center;gap:.2rem;flex-wrap:wrap}
+.nav-link{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.98rem;
+  color:#d8d4ec;text-decoration:none;padding:.55rem .95rem;border-radius:12px;
+  position:relative;transition:all .3s ease;display:flex;align-items:center;gap:.4rem;white-space:nowrap}
+.nav-link .ico{font-size:1.05rem;transition:transform .3s}
+.nav-link::before{content:'';position:absolute;inset:0;border-radius:12px;
+  background:linear-gradient(135deg,rgba(139,92,246,.25),rgba(236,72,153,.18));opacity:0;transition:opacity .3s;z-index:-1}
+.nav-link::after{content:'';position:absolute;bottom:4px;left:50%;width:0;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--blue),var(--pink),var(--yellow));transform:translateX(-50%);
+  transition:width .35s cubic-bezier(.2,.7,.3,1)}
+.nav-link:hover{color:#fff;transform:translateY(-2px)}
+.nav-link:hover::before{opacity:1}
+.nav-link:hover::after{width:60%}
+.nav-link:hover .ico{transform:scale(1.25) rotate(-8deg)}
+.nav-link.cta{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;font-weight:700;
+  box-shadow:0 6px 22px rgba(139,92,246,.5);margin-left:.4rem}
+.nav-link.cta::before,.nav-link.cta::after{display:none}
+.nav-link.cta:hover{transform:translateY(-2px) scale(1.04);
+  box-shadow:0 10px 30px rgba(236,72,153,.65);
+  background:linear-gradient(135deg,var(--pink),var(--purple),var(--yellow))}
+.nav-toggle{display:none;background:rgba(139,92,246,.15);border:1px solid var(--border);
+  color:#fff;font-size:1.4rem;padding:.45rem .75rem;border-radius:10px;cursor:pointer;transition:all .25s}
+.nav-toggle:hover{background:rgba(139,92,246,.3)}
+.mobile-menu{position:fixed;top:72px;left:0;right:0;background:rgba(10,6,32,.98);
+  backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:1rem;
+  display:none;flex-direction:column;gap:.4rem;z-index:998;animation:slideDown .3s ease}
+.mobile-menu.show{display:flex}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:none}}
+.mobile-menu .nav-link{padding:.85rem 1rem;font-size:1.05rem;border-radius:12px;
+  background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(236,72,153,.08));
+  border:1px solid rgba(139,92,246,.2)}
+.mobile-menu .nav-link.cta{margin-left:0;justify-content:center;margin-top:.5rem}
+@media (max-width:960px){.nav-links{display:none}.nav-toggle{display:flex;align-items:center;justify-content:center}}
+.hero{min-height:calc(100vh - 80px);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:3rem 1rem;position:relative;perspective:1000px}
+.hero-inner{transform-style:preserve-3d;animation:float 6s ease-in-out infinite;max-width:900px}
+@keyframes float{0%,100%{transform:translateY(0) rotateX(0)}50%{transform:translateY(-12px) rotateX(2deg)}}
+.logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(2.5rem,9vw,6.5rem);letter-spacing:.08em;
+  background:linear-gradient(90deg,var(--purple),var(--blue),var(--pink),var(--yellow),var(--lime),var(--purple));
+  background-size:500% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:shine 10s linear infinite;filter:drop-shadow(0 0 30px rgba(139,92,246,.7));user-select:none}
+.hero h2{font-family:'Orbitron',sans-serif;font-weight:700;font-size:clamp(1.1rem,3.2vw,1.9rem);
+  letter-spacing:.15em;text-transform:uppercase;color:#fff;margin:.6rem 0 1rem;opacity:.9}
+.hero p.sub{max-width:660px;margin:0 auto 1.4rem;font-size:clamp(1rem,2.2vw,1.25rem);color:#d8d4ec}
+.hero .quote{display:inline-block;margin-bottom:1.6rem;padding:.7rem 1.4rem;border-radius:999px;
+  background:linear-gradient(135deg,rgba(251,191,36,.18),rgba(236,72,153,.18),rgba(139,92,246,.18));
+  border:1px solid rgba(251,191,36,.5);color:var(--yellow);font-weight:600;font-size:.98rem;
+  box-shadow:0 0 30px rgba(251,191,36,.25)}
+.price-badge{display:inline-flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem}
+.price-badge span{padding:.55rem 1.1rem;border-radius:999px;border:1px solid var(--border);
+  background:var(--card);font-weight:600;font-size:.95rem;backdrop-filter:blur(10px);transition:all .3s}
+.price-badge span:nth-child(1):hover{transform:translateY(-3px);border-color:var(--blue);box-shadow:0 0 20px rgba(34,211,238,.4)}
+.price-badge span:nth-child(2):hover{transform:translateY(-3px);border-color:var(--pink);box-shadow:0 0 20px rgba(236,72,153,.4)}
+.price-badge span b{color:var(--blue)}
+.btn{display:inline-block;font-family:'Orbitron',sans-serif;font-weight:700;letter-spacing:.08em;
+  padding:1rem 2.4rem;border-radius:12px;text-decoration:none;color:#fff;
+  background:linear-gradient(135deg,var(--purple),var(--pink));
+  box-shadow:0 10px 35px rgba(139,92,246,.5), inset 0 0 20px rgba(255,255,255,.1);
+  transition:transform .25s, box-shadow .25s;position:relative;overflow:hidden;
+  border:none;cursor:pointer;font-size:1rem}
+.btn::after{content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);
+  transform:skewX(-20deg);animation:sheen 3s infinite}
+@keyframes sheen{0%{left:-120%}60%{left:130%}100%{left:130%}}
+.btn:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 18px 50px rgba(236,72,153,.6)}
+.btn.ghost{background:transparent;border:1px solid var(--border);box-shadow:none}
+.btn.ghost:hover{border-color:var(--blue);box-shadow:0 0 30px rgba(34,211,238,.4)}
+.btn.small{padding:.6rem 1.2rem;font-size:.85rem;font-family:'Rajdhani',sans-serif;font-weight:700}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.scroll-hint{position:absolute;bottom:2rem;font-size:.85rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--muted);animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+.marquee{overflow:hidden;padding:1.2rem 0;
+  background:linear-gradient(90deg,rgba(139,92,246,.18),rgba(236,72,153,.18),rgba(251,146,60,.15),rgba(34,211,238,.18));
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.marquee-track{display:flex;gap:3rem;animation:scroll 30s linear infinite;white-space:nowrap;
+  font-family:'Orbitron',sans-serif;font-weight:700;letter-spacing:.1em;color:#fff;font-size:1rem;text-transform:uppercase}
+@keyframes scroll{to{transform:translateX(-50%)}}
+section.wrap{max-width:1150px;margin:0 auto;padding:5rem 1.2rem;position:relative}
+.reveal{opacity:0;transform:translateY(50px);transition:opacity .9s ease, transform .9s cubic-bezier(.2,.7,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+h3.title{font-family:'Orbitron',sans-serif;font-size:clamp(1.6rem,4vw,2.5rem);letter-spacing:.06em;
+  margin-bottom:1.8rem;display:inline-block;
+  background:linear-gradient(90deg,var(--blue),var(--purple),var(--pink),var(--yellow));
+  background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  position:relative;animation:shine 8s linear infinite}
+h3.title::after{content:'';display:block;height:3px;width:60%;margin-top:.4rem;border-radius:3px;
+  background:linear-gradient(90deg,var(--purple),var(--pink),var(--yellow),transparent)}
+p, li{font-size:1.08rem;color:#d8d4ec}
+.muted{color:var(--muted)}
+.grid{display:grid;gap:1.5rem}
+.grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.grid.cols-3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.grid.cols-4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.8rem;
+  backdrop-filter:blur(14px);transform-style:preserve-3d;
+  transition:transform .25s ease, border-color .3s, box-shadow .3s;
+  box-shadow:0 20px 45px rgba(0,0,0,.4);position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(139,92,246,.25),transparent 60%);
+  opacity:0;transition:opacity .3s}
+.card:hover::before{opacity:1}
+.card:hover{border-color:rgba(236,72,153,.55);box-shadow:0 25px 65px rgba(139,92,246,.4)}
+.card h4{font-family:'Orbitron',sans-serif;font-size:1.15rem;letter-spacing:.04em;margin-bottom:.7rem;color:#fff}
+.video-preview{width:100%;aspect-ratio:9/16;max-height:420px;border-radius:12px;margin-bottom:1rem;
+  background:linear-gradient(135deg,rgba(139,92,246,.35),rgba(236,72,153,.25),rgba(251,146,60,.2),rgba(34,211,238,.25));
+  border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
+  font-size:3.5rem;color:rgba(255,255,255,.9);box-shadow:0 8px 30px rgba(0,0,0,.5);
+  position:relative;overflow:hidden;text-decoration:none}
+.video-preview::after{content:'▶';font-size:2.2rem;color:#fff;background:rgba(0,0,0,.5);
+  width:70px;height:70px;border-radius:50%;display:grid;place-items:center;
+  border:2px solid rgba(255,255,255,.6);backdrop-filter:blur(5px);transition:transform .3s}
+.video-preview:hover::after{transform:scale(1.15)}
+.stat{text-align:center;padding:1.8rem 1rem;
+  background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(236,72,153,.1));
+  border:1px solid var(--border);border-radius:18px;backdrop-filter:blur(10px);transition:transform .3s}
+.stat:hover{transform:translateY(-6px)}
+.stat .num{font-family:'Orbitron',sans-serif;font-size:clamp(1.8rem,5vw,2.6rem);font-weight:900;
+  background:linear-gradient(90deg,var(--blue),var(--purple));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .lbl{font-size:.95rem;color:var(--muted);margin-top:.3rem;text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+.price-card{text-align:center;transition:transform .3s}
+.price-card:hover{transform:translateY(-8px) scale(1.02)}
+.price-card .amount{font-family:'Orbitron',sans-serif;font-size:2.4rem;font-weight:900;
+  background:linear-gradient(90deg,var(--blue),var(--purple));
+  -webkit-background-clip:text;background-clip:text;color:transparent;margin:.4rem 0 .8rem}
+.price-card.hot{border-color:rgba(236,72,153,.5);
+  box-shadow:0 0 40px rgba(236,72,153,.3), 0 20px 45px rgba(0,0,0,.4)}
+.price-card.hot .amount{background:linear-gradient(90deg,var(--pink),var(--purple),var(--yellow));
+  -webkit-background-clip:text;background-clip:text}
+.tag{position:absolute;top:1rem;right:1rem;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;
+  padding:.3rem .8rem;border-radius:999px;background:linear-gradient(90deg,var(--pink),var(--purple));
+  color:#fff;font-weight:700;box-shadow:0 0 20px rgba(236,72,153,.6)}
+.steps{counter-reset:step;display:grid;gap:1rem}
+.step{display:flex;gap:1rem;align-items:flex-start;padding:1.2rem 1.4rem;border-radius:14px;
+  background:var(--card);border:1px solid var(--border);transition:transform .3s,border-color .3s}
+.step:hover{transform:translateX(8px);border-color:var(--blue)}
+.step::before{counter-increment:step;content:counter(step);
+  flex:0 0 40px;height:40px;border-radius:50%;display:grid;place-items:center;
+  font-family:'Orbitron',sans-serif;font-weight:700;
+  background:linear-gradient(135deg,var(--purple),var(--pink),var(--yellow));color:#fff;
+  box-shadow:0 0 20px rgba(139,92,246,.5)}
+.reviews-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2rem}
+.rating-summary{display:flex;align-items:center;gap:1rem;padding:1rem 1.4rem;
+  background:var(--card);border:1px solid var(--border);border-radius:16px;backdrop-filter:blur(10px)}
+.rating-summary .big{font-family:'Orbitron',sans-serif;font-size:2.5rem;font-weight:900;
+  background:linear-gradient(90deg,var(--yellow),var(--pink));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.rating-summary .info{font-size:.9rem;color:var(--muted)}
+.rating-summary .stars{color:var(--yellow);font-size:1.1rem;letter-spacing:2px}
+.reviews-grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.review{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;
+  backdrop-filter:blur(12px);transition:transform .3s, border-color .3s, box-shadow .3s;
+  position:relative;animation:popIn .5s ease}
+@keyframes popIn{from{opacity:0;transform:translateY(15px) scale(.96)}to{opacity:1;transform:none}}
+.review:hover{transform:translateY(-5px);border-color:var(--blue);box-shadow:0 15px 40px rgba(34,211,238,.25)}
+.review .top{display:flex;justify-content:space-between;align-items:flex-start;gap:.6rem;margin-bottom:.6rem}
+.review .who{display:flex;align-items:center;gap:.7rem}
+.review .avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
+  font-family:'Orbitron',sans-serif;font-weight:700;
+  background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;font-size:1rem;
+  flex:0 0 42px;box-shadow:0 0 15px rgba(139,92,246,.5)}
+.review .name{font-weight:700;color:#fff}
+.review .date{font-size:.8rem;color:var(--muted)}
+.review .stars{color:var(--yellow);font-size:1rem;letter-spacing:1px;margin:.2rem 0 .6rem}
+.review p{font-size:1rem;color:#d8d4ec}
+.review-form{margin-top:2.5rem;
+  background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(236,72,153,.1),rgba(34,211,238,.12));
+  border:1px solid var(--border);border-radius:20px;padding:2rem;backdrop-filter:blur(14px)}
+.review-form h4{font-family:'Orbitron',sans-serif;font-size:1.3rem;color:#fff;margin-bottom:1.2rem;letter-spacing:.04em}
+.field{margin-bottom:1.2rem}
+.field label{display:block;font-weight:600;margin-bottom:.4rem;color:#d8d4ec;font-size:.98rem}
+.field input, .field textarea, .field select{width:100%;padding:.9rem 1.1rem;border-radius:12px;
+  background:rgba(0,0,0,.35);border:1px solid var(--border);color:#fff;
+  font-family:inherit;font-size:1rem;transition:border-color .3s, box-shadow .3s;resize:vertical}
+.field select{cursor:pointer}
+.field select option{background:#14092e;color:#fff}
+.field input:focus, .field textarea:focus, .field select:focus{
+  outline:none;border-color:var(--pink);box-shadow:0 0 0 3px rgba(236,72,153,.15)}
+.field textarea{min-height:110px}
+.star-picker{display:flex;gap:.3rem;margin-top:.3rem}
+.star-picker span{font-size:2rem;color:#3a3552;cursor:pointer;transition:transform .2s, color .2s;
+  user-select:none;line-height:1}
+.star-picker span:hover{transform:scale(1.2)}
+.star-picker span.active{color:var(--yellow);text-shadow:0 0 15px rgba(251,191,36,.7)}
+.form-msg{margin-top:1rem;padding:.8rem 1.2rem;border-radius:10px;display:none;font-weight:600}
+.form-msg.ok{display:block;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.5);color:var(--green)}
+.form-msg.err{display:block;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.5);color:#f87171}
+#order-form form{background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(236,72,153,.12));
+  border:1px solid var(--border);border-radius:20px;padding:2rem;backdrop-filter:blur(14px);max-width:700px}
+.faq details{background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:1rem 1.4rem;margin-bottom:.9rem;backdrop-filter:blur(10px);transition:border-color .3s}
+.faq details[open]{border-color:var(--pink)}
+.faq summary{cursor:pointer;font-weight:600;font-size:1.1rem;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;color:#fff}
+.faq summary::after{content:'+';font-family:'Orbitron',sans-serif;color:var(--pink);font-size:1.4rem;transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{margin-top:.8rem;color:var(--muted)}.pay-card{background:linear-gradient(135deg,rgba(139,92,246,.22),rgba(236,72,153,.15),rgba(34,211,238,.15));
+  border:1px solid var(--border);border-radius:24px;
+  padding:2.5rem 1.5rem;text-align:center;
+  backdrop-filter:blur(14px);box-shadow:0 20px 55px rgba(0,0,0,.4)}
+.pay-card .icon{font-size:2.8rem;margin-bottom:.8rem;filter:drop-shadow(0 0 20px rgba(236,72,153,.7))}
+.pay-card h4{font-family:'Orbitron',sans-serif;font-size:1.3rem;color:#fff;margin-bottom:1rem;letter-spacing:.05em}
+.pay-card > p{max-width:560px;margin:0 auto 1rem;color:#d8d4ec}
+.banks{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:1.6rem;text-align:left}
+.bank-btn{display:flex;align-items:center;gap:.9rem;
+  padding:1.1rem 1.2rem;border-radius:14px;
+  background:var(--card);border:1px solid var(--border);
+  color:#fff;font-weight:600;font-size:1rem;
+  transition:transform .3s, border-color .3s, box-shadow .3s;
+  cursor:pointer;font-family:inherit;text-align:left}
+.bank-btn:hover{transform:translateY(-4px);border-color:var(--pink);box-shadow:0 15px 40px rgba(236,72,153,.25)}
+.bank-btn .bank-icon{width:44px;height:44px;flex:0 0 44px;border-radius:10px;
+  display:grid;place-items:center;font-family:'Orbitron',sans-serif;font-weight:900;font-size:1rem;
+  box-shadow:0 0 15px rgba(0,0,0,.4)}
+.bank-btn .bank-icon.sber{background:linear-gradient(135deg,#21a038,#4ade80)}
+.bank-btn .bank-icon.tbank{background:linear-gradient(135deg,#ffe500,#ffea5e);color:#111}
+.bank-btn .bank-icon.vtb{background:linear-gradient(135deg,#0a2896,#3b82f6)}
+.bank-btn .bank-icon.alfa{background:linear-gradient(135deg,#ef3124,#f87171)}
+.bank-btn .bank-icon.other{background:linear-gradient(135deg,var(--purple),var(--pink))}
+.bank-btn .bank-info{flex:1}
+.bank-btn .bank-name{color:#fff;font-weight:700;font-size:1.02rem}
+.bank-btn .bank-hint{font-size:.82rem;color:var(--muted);margin-top:.15rem}
+.pay-note{margin-top:1.6rem;padding:1rem 1.2rem;
+  background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.5);
+  border-radius:12px;color:var(--green);font-weight:600;font-size:.95rem;text-align:center}
+.support-grid{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.support-card{background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(236,72,153,.1),rgba(34,211,238,.12));
+  border:1px solid var(--border);border-radius:20px;padding:1.8rem;
+  backdrop-filter:blur(14px);
+  transition:transform .3s, border-color .3s, box-shadow .3s;
+  cursor:pointer;text-align:left;font-family:inherit}
+.support-card:hover{transform:translateY(-6px);border-color:var(--pink);box-shadow:0 20px 50px rgba(236,72,153,.3)}
+.support-card .sc-icon{font-size:2.4rem;margin-bottom:.8rem;display:block}
+.support-card h4{font-family:'Orbitron',sans-serif;font-size:1.15rem;color:#fff;margin-bottom:.5rem}
+.support-card p{color:#d8d4ec;font-size:.98rem}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);
+  z-index:1002;display:none;align-items:flex-start;justify-content:center;
+  padding:2rem 1rem;overflow-y:auto}
+.modal-overlay.show{display:flex}
+.modal{background:linear-gradient(180deg,#14092e,#0b0620);
+  border:1px solid rgba(236,72,153,.3);border-radius:22px;
+  max-width:560px;width:100%;padding:2rem;
+  box-shadow:0 30px 90px rgba(236,72,153,.4);
+  animation:popIn .35s ease;position:relative}
+.modal.wide{max-width:860px}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;gap:1rem}
+.modal-head h3{font-family:'Orbitron',sans-serif;font-size:1.4rem;
+  background:linear-gradient(90deg,var(--blue),var(--pink),var(--yellow));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.modal-close{background:transparent;border:none;color:var(--muted);font-size:1.8rem;cursor:pointer;line-height:1;transition:color .25s}
+.modal-close:hover{color:var(--pink)}
+.pay-step{padding:.9rem 1.1rem;border-radius:12px;
+  background:rgba(0,0,0,.4);border:1px solid var(--border);
+  margin-bottom:.8rem;font-size:.98rem;color:#d8d4ec}
+.pay-step b{color:var(--pink)}
+.pay-step .num{display:inline-block;width:24px;height:24px;border-radius:50%;
+  background:linear-gradient(135deg,var(--pink),var(--yellow));color:#111;
+  text-align:center;font-weight:900;font-size:.85rem;line-height:24px;margin-right:.5rem}
+.receipt{background:linear-gradient(180deg,#fff,#f4f4f9);color:#111;
+  border-radius:16px;padding:1.6rem;
+  box-shadow:0 20px 50px rgba(0,0,0,.5);
+  font-family:'Rajdhani',sans-serif;position:relative;overflow:hidden}
+.receipt::before,.receipt::after{content:'';position:absolute;left:0;right:0;height:12px;
+  background:radial-gradient(circle at 10px -4px, transparent 10px, #fff 11px) repeat-x;
+  background-size:20px 12px}
+.receipt::before{top:0}
+.receipt::after{bottom:0;transform:rotate(180deg)}
+.receipt .r-top{text-align:center;border-bottom:1px dashed #ccc;padding-bottom:1rem;margin-bottom:1rem}
+.receipt .r-logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.4rem;color:#111;letter-spacing:.05em}
+.receipt .r-sub{font-size:.85rem;color:#666;letter-spacing:.15em;text-transform:uppercase}
+.receipt .r-row{display:flex;justify-content:space-between;padding:.4rem 0;font-size:1rem;color:#333}
+.receipt .r-row b{color:#111}
+.receipt .r-code{margin:1rem 0;text-align:center;
+  font-family:'Orbitron',sans-serif;font-weight:900;
+  font-size:2rem;letter-spacing:.2em;color:#8b5cf6;
+  background:rgba(139,92,246,.1);padding:1rem;border-radius:12px;
+  border:2px dashed #8b5cf6}
+.receipt .r-code-label{font-size:.85rem;color:#666;text-align:center;letter-spacing:.15em;text-transform:uppercase}
+.receipt .r-status{margin-top:1rem;text-align:center;padding:.9rem;border-radius:10px;
+  background:linear-gradient(135deg,#10b981,#22d3ee);
+  color:#fff;font-weight:700;font-size:1rem;letter-spacing:.05em}
+.receipt .r-thanks{text-align:center;font-size:.9rem;color:#666;margin-top:1rem}
+.admin-trigger{display:inline-flex;align-items:center;gap:.4rem;
+  padding:.5rem 1.1rem;border-radius:10px;
+  background:rgba(139,92,246,.12);
+  border:1px solid rgba(139,92,246,.3);
+  color:var(--muted);font-size:.9rem;cursor:pointer;
+  transition:all .3s;font-family:inherit}
+.admin-trigger:hover{border-color:var(--purple);color:var(--purple);background:rgba(139,92,246,.2)}
+#passwordInput{letter-spacing:.3em;text-align:center;font-family:'Orbitron',sans-serif;font-size:1.1rem}
+.admin-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.4rem;
+  padding-bottom:1rem;border-bottom:1px dashed var(--border)}
+.admin-tab{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.95rem;
+  padding:.6rem 1.1rem;border-radius:10px;cursor:pointer;
+  border:1px solid var(--border);background:var(--card);color:#fff;
+  transition:all .25s}
+.admin-tab:hover{border-color:var(--pink);color:var(--pink)}
+.admin-tab.active{background:linear-gradient(135deg,var(--pink),var(--purple));
+  border-color:transparent;box-shadow:0 5px 20px rgba(236,72,153,.5)}
+.admin-tab .badge{display:inline-block;margin-left:.4rem;padding:.05rem .5rem;border-radius:999px;
+  background:rgba(0,0,0,.4);font-size:.78rem}
+.admin-content{display:grid;gap:1rem;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  max-height:65vh;overflow-y:auto;padding-right:.4rem}
+.admin-content::-webkit-scrollbar{width:8px}
+.admin-content::-webkit-scrollbar-thumb{background:linear-gradient(var(--pink),var(--purple));border-radius:8px}
+.admin-item{background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:1.3rem;backdrop-filter:blur(12px);
+  transition:transform .3s, border-color .3s, box-shadow .3s;animation:popIn .5s ease}
+.admin-item:hover{transform:translateY(-4px);border-color:var(--pink);box-shadow:0 15px 40px rgba(236,72,153,.25)}
+.admin-item .head{display:flex;align-items:center;gap:.7rem;
+  margin-bottom:.8rem;padding-bottom:.8rem;border-bottom:1px dashed var(--border)}
+.admin-item .avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
+  font-family:'Orbitron',sans-serif;font-weight:700;color:#fff;font-size:1rem;flex:0 0 42px}
+.admin-item .avatar.blue{background:linear-gradient(135deg,var(--blue),var(--purple))}
+.admin-item .avatar.pink{background:linear-gradient(135deg,var(--pink),var(--purple))}
+.admin-item .avatar.green{background:linear-gradient(135deg,var(--green),var(--blue))}
+.admin-item .avatar.yellow{background:linear-gradient(135deg,var(--yellow),var(--pink))}
+.admin-item .who{flex:1;min-width:0}
+.admin-item .name{font-weight:700;color:#fff;font-size:1.05rem}
+.admin-item .date{font-size:.78rem;color:var(--muted)}
+.admin-item .row{display:flex;gap:.5rem;margin-bottom:.5rem;font-size:.96rem}
+.admin-item .row .k{color:var(--muted);flex:0 0 80px;font-weight:600;font-size:.86rem;text-transform:uppercase;letter-spacing:.05em}
+.admin-item .row .v{color:#fff;word-break:break-word;flex:1}
+.admin-item .row .v a{color:var(--blue);text-decoration:none}
+.admin-item .idea{margin-top:.7rem;padding:.8rem 1rem;background:rgba(0,0,0,.4);
+  border-radius:10px;border-left:3px solid var(--pink);color:#d8d4ec;font-size:.96rem;line-height:1.5}
+.admin-item .order-code{display:inline-block;margin-top:.6rem;padding:.4rem .9rem;border-radius:10px;
+  background:linear-gradient(135deg,var(--purple),var(--pink));
+  color:#fff;font-family:'Orbitron',sans-serif;font-weight:900;font-size:1rem;letter-spacing:.15em}
+.status{display:inline-block;padding:.2rem .7rem;border-radius:999px;
+  font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.status.pending{background:rgba(251,191,36,.2);color:var(--yellow);border:1px solid rgba(251,191,36,.5)}
+.status.approved{background:rgba(16,185,129,.2);color:var(--green);border:1px solid rgba(16,185,129,.5)}
+.status.rejected{background:rgba(239,68,68,.2);color:#f87171;border:1px solid rgba(239,68,68,.5)}
+.status.paid{background:rgba(34,211,238,.2);color:var(--blue);border:1px solid rgba(34,211,238,.5)}
+.admin-actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}
+.admin-actions button{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.85rem;
+  padding:.5rem 1rem;border-radius:10px;cursor:pointer;
+  border:1px solid var(--border);background:var(--card);color:#fff;transition:all .25s}
+.admin-actions button.approve:hover{border-color:var(--green);color:var(--green)}
+.admin-actions button.reject:hover{border-color:#f87171;color:#f87171}
+.empty-orders{text-align:center;padding:3rem 1rem;color:var(--muted);font-size:1.05rem;grid-column:1/-1}
+.empty-orders .icon{font-size:3rem;display:block;margin-bottom:.8rem;opacity:.6}
+.bot-msg{background:linear-gradient(135deg,rgba(34,211,238,.18),rgba(139,92,246,.18));
+  border:1px solid rgba(34,211,238,.5);
+  border-radius:14px;padding:1.1rem 1.3rem;
+  color:#d8d4ec;font-size:1rem;
+  display:flex;gap:.9rem;align-items:flex-start;margin-bottom:1.2rem}
+.bot-msg .bot-icon{width:38px;height:38px;flex:0 0 38px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),var(--purple));
+  display:grid;place-items:center;font-size:1.2rem;
+  box-shadow:0 0 15px rgba(34,211,238,.5);animation:pulse 2s infinite}
+.bot-msg .bot-text b{color:var(--blue)}
+footer{text-align:center;padding:2.5rem 1rem;border-top:1px solid var(--border);
+  color:var(--muted);font-size:.95rem}
+footer span{color:var(--pink)}
+@media (max-width:600px){
+  section.wrap{padding:3.5rem 1rem}
+  .hero p.sub{font-size:1rem}
+  .review-form{padding:1.4rem}
+  #order-form form{padding:1.4rem}
+  .star-picker span{font-size:1.7rem}
+  .video-preview{max-height:360px}
+  .modal{padding:1.4rem}
+  .admin-content{grid-template-columns:1fr}
+  .admin-item .row .k{flex:0 0 65px;font-size:.78rem}
+  .receipt .r-code{font-size:1.4rem;letter-spacing:.15em}
+  }
 </style>
 </head>
 <body>
 <div id="progress"></div>
 <canvas id="bg-canvas"></canvas>
 <canvas id="particles"></canvas>
-<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+<div class="orb o3"></div>
+  <nav class="navbar" id="navbar"
+    <a class="nav-logo" href="#top"><span class="dot"></span>XERO4484</a>
+    <div class="nav-links">
+      <a class="nav-link" href="#about"><span class="ico">🌸</span> О канале</a>
+      <a class="nav-link" href="#portfolio"><span class="ico">🎬</span> Работы</a>
+      <a class="nav-link" href="#prices"><span class="ico">💰</span> Цены</a>
+      <a class="nav-link" href="#payment"><span class="ico">💳</span> Оплата</a>
+      <a class="nav-link" href="#support"><span class="ico">🆘</span> Поддержка</a>
+      <a class="nav-link" href="#reviews"><span class="ico">⭐</span> Отзывы</a>
+      <a class="nav-link cta" href="#order-form"><span class="ico">🚀</span> Заказать</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a class="nav-link" href="#about"><span class="ico">🌸</span> О канале</a>
+  <a class="nav-link" href="#portfolio"><span class="ico">🎬</span> Работы</a>
+  <a class="nav-link" href="#prices"><span class="ico">💰</span> Цены</a>
+  <a class="nav-link" href="#payment"><span class="ico">💳</span> Оплата</a>
+  <a class="nav-link" href="#support"><span class="ico">🆘</span> Поддержка</a>
+  <a class="nav-link" href="#reviews"><span class="ico">⭐</span> Отзывы</a>
+  <a class="nav-link cta" href="#order-form"><span class="ico">🚀</span> Заказать</a>
+</div>
+
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <h1 class="logo">XERO4484</h1>
+    <h2>Эдиты на заказ</h2>
+    <p class="sub">Превращаю твои кадры в стильные эдиты с объёмом, светом и вайбом.</p>
+    <div class="quote">⭐ Эдиты неплохие получаются, стоят своих денег</div>
+    <div class="price-badge">
+      <span>Лёгкий — <b>от 15 ₽</b></span>
+      <span>Сложный — <b>от 30 ₽</b></span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn" href="#order-form">Заказать сейчас →</a>
+      <a class="btn ghost" href="#reviews">Читать отзывы</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll ↓</div>
+</header>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>✦ 3D-ПЕРЕХОДЫ</span><span>✦ ЦВЕТОКОР</span><span>✦ ТРЯСКА</span><span>✦ МАСКИ</span><span>✦ СВЕЧЕНИЕ</span><span>✦ СИНХРОН ПО БИТАМ</span><span>✦ АНИМАЦИЯ</span><span>✦ ФИНАЛЬНЫЙ РЕНДЕР</span>
+    <span>✦ 3D-ПЕРЕХОДЫ</span><span>✦ ЦВЕТОКОР</span><span>✦ ТРЯСКА</span><span>✦ МАСКИ</span><span>✦ СВЕЧЕНИЕ</span><span>✦ СИНХРОН ПО БИТАМ</span><span>✦ АНИМАЦИЯ</span><span>✦ ФИНАЛЬНЫЙ РЕНДЕР</span>
+  </div>
+</div>
+
+<section class="wrap reveal" id="stats">
+  <div class="grid cols-4">
+    <div class="stat"><div class="num" data-count="150">0</div><div class="lbl">Эдитов сделано</div></div>
+    <div class="stat"><div class="num" data-count="90">0</div><div class="lbl">Довольных клиентов</div></div>
+    <div class="stat"><div class="num" data-count="15">0</div><div class="lbl">₽ минимальная цена</div></div>
+    <div class="stat"><div class="num" data-count="24">0</div><div class="lbl">Часа на связь</div></div>
+  </div>
+</section>
+
+<section class="wrap reveal" id="about">
+  <h3 class="title">О канале</h3>
+  <p>Привет! Я делаю заказные эдиты для TikTok. Мой канал — <b>xero4484</b>. Здесь ты найдёшь примеры работ, а также можешь заказать свой эдит.</p>
+  <p class="muted" style="margin-top:1rem">Я монтирую под музыку, добавляю 3D-переходы, эффекты, цветокоррекцию и анимацию. Работаю с разными идеями: от простых нарезок до сложных сюжетных эдитов.</p>
+</section>
+
+<section class="wrap reveal" id="portfolio">
+  <h3 class="title">Примеры работ</h3>
+  <p class="muted" style="margin-bottom:1.8rem">Короткие превью моих эдитов. Полные версии — в TikTok @xero4484.</p>
+  <div class="grid cols-2">
+    <div class="card tilt">
+      <a href="https://vt.tiktok.com/ZSquw6WNE/" target="_blank" rel="noopener" class="video-preview">🎵</a>
+      <h4>Эдит под фонк</h4>
+      <p>Синхрон по битам, 3D-переходы, свечение.</p>
+      <a href="https://vt.tiktok.com/ZSquw6WNE/" target="_blank" rel="noopener" class="btn ghost small" style="margin-top:1rem">Смотреть в TikTok →</a>
+    </div>
+    <div class="card tilt">
+      <a href="https://vt.tiktok.com/ZSquTtdfv/" target="_blank" rel="noopener" class="video-preview">😂</a>
+      <h4>Мем-эдит</h4>
+      <p>Тряска, глитч, маски, быстрый ритм.</p>
+      <a href="https://vt.tiktok.com/ZSquTtdfv/" target="_blank" rel="noopener" class="btn ghost small" style="margin-top:1rem">Смотреть в TikTok →</a>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:1.6rem">
+    <a class="btn ghost" href="https://www.tiktok.com/@xero4484" target="_blank" rel="noopener">Все работы в TikTok →</a>
+  </div>
+</section>
+
+<section class="wrap reveal" id="edit">
+  <h3 class="title">Что такое эдит?</h3>
+  <p style="margin-bottom:1.6rem">Эдит — это короткое видео, собранное под музыку с эффектами, переходами и стилем.</p>
+  <div class="grid cols-2">
+    <div class="card tilt"><h4>🌱 Простой эдит</h4><p>Пара клипов, минимум эффектов, быстрый монтаж.</p></div>
+    <div class="card tilt"><h4>🔥 Сложный эдит</h4><p>3D-переходы, маски, тряска, свечение, цветокор, синхронизация по битам.</p></div>
+  </div>
+</section>
+
+<section class="wrap reveal" id="services">
+  <h3 class="title">Услуги</h3>
+  <p style="margin-bottom:1.6rem">Заказные эдиты под ключ:</p>
+  <div class="grid cols-2">
+    <div class="card tilt"><h4>🎵 Монтаж под трек</h4></div>
+    <div class="card tilt"><h4>💧 Ваша водянка</h4></div>
+    <div class="card tilt"><h4>🎯 Синхронизация с музыкой</h4></div>
+    <div class="card tilt"><h4>🎬 Финальный рендер в хорошем качестве</h4></div>
+  </div>
+</section>
+
+<section class="wrap reveal" id="prices">
+  <h3 class="title">Цены</h3>
+  <div class="grid cols-2">
+    <div class="card tilt price-card">
+      <h4>Лёгкий эдит</h4>
+      <div class="amount">15–25 ₽</div>
+      <p>Простой, но красивый эдит: нарезка, базовая синхронизация, минимум эффектов.</p>
+    </div>
+    <div class="card tilt price-card hot">
+      <span class="tag">Топ</span>
+      <h4>Сложноватый эдит</h4>
+      <div class="amount">30–50 ₽</div>
+      <p>3D-переходы, маски, свечение, тряска, цветокор, анимация и глубокий монтаж.</p>
+    </div>
+  </div>
+  <p class="muted" style="margin-top:1.4rem">Точная цена зависит от идеи и объёма работы. Всё обсуждаем в личке.</p>
+</section>
+
+<section class="wrap reveal" id="terms">
+  <h3 class="title">Что ты получаешь</h3>
+  <div class="grid cols-2">
+    <div class="card tilt"><h4>📁 Готовый файл</h4><p>MP4 1080p, вертикальный 9:16, без водяных знаков (если не просил).</p></div>
+    <div class="card tilt"><h4>📝 До 3 правок</h4><p>Бесплатно. Если что-то не так — исправим.</p></div>
+    <div class="card tilt"><h4>⏳ Срок</h4><p>От 1 до 3 дней. Срочные заказы — по договорённости.</p></div>
+    <div class="card tilt"><h4>❌ Исходники</h4><p>Не передаю (проект, слои, эффекты). Только готовый файл.</p></div>
+  </div>
+</section>
+
+<section class="wrap reveal" id="how">
+  <h3 class="title">Как заказать</h3>
+  <div class="steps">
+    <div class="step">Напиши мне в TikTok: <b>@xero4484</b></div>
+    <div class="step">Расскажи идею, скинь клипы и трек.</div>
+    <div class="step">Я скажу цену и сроки.</div>
+    <div class="step">После согласования делаю эдит.</div>
+    <div class="step">Получаешь готовое видео.</div>
+  </div>
+</section>
+
+<section class="wrap reveal" id="order-form">
+  <h3 class="title">Заказать эдит</h3>
+  <form id="orderForm" autocomplete="off">
+    <div class="field">
+      <label for="oName">Твоё имя</label>
+      <input type="text" id="oName" maxlength="30" placeholder="Например: Даниил" required>
+    </div>
+    <div class="field">
+      <label for="oTikTok">Твой TikTok (ник)</label>
+      <input type="text" id="oTikTok" maxlength="50" placeholder="@xero4484" required>
+    </div>
+    <div class="field">
+      <label for="oTrack">Трек/ссылка</label>
+      <input type="text" id="oTrack" maxlength="200" placeholder="Ссылка на трек или название" required>
+    </div>
+    <div class="field">
+      <label for="oIdea">Идея/референс (коротко)</label>
+      <textarea id="oIdea" maxlength="400" placeholder="Что хочешь видеть: стиль, эффекты, настроение..." required></textarea>
+    </div>
+    <button class="btn" type="submit">Отправить заявку</button>
+    <div class="form-msg" id="orderMsg"></div>
+  </form>
+</section>
+
+<section class="wrap reveal" id="payment">
+  <h3 class="title">Оплата</h3>
+  <div class="pay-card">
+    <div class="icon">💳</div>
+    <h4>Выбери свой банк</h4>
+    <p>Нажми на свой банк — покажу инструкцию, как оплатить. Реквизиты пришлю в личке TikTok.</p>
+    <div class="banks">
+      <button class="bank-btn" data-bank="Сбербанк"><span class="bank-icon sber">С</span><span class="bank-info"><span class="bank-name">Сбербанк</span><span class="bank-hint">Онлайн / приложение</span></span></button>
+      <button class="bank-btn" data-bank="Т-Банк"><span class="bank-icon tbank">Т</span><span class="bank-info"><span class="bank-name">Т-Банк</span><span class="bank-hint">Быстрый перевод</span></span></button>
+      <button class="bank-btn" data-bank="ВТБ"><span class="bank-icon vtb">В</span><span class="bank-info"><span class="bank-name">ВТБ</span><span class="bank-hint">По номеру карты</span></span></button>
+      <button class="bank-btn" data-bank="Альфа-Банк"><span class="bank-icon alfa">А</span><span class="bank-info"><span class="bank-name">Альфа-Банк</span><span class="bank-hint">Перевод по СБП</span></span></button>
+      <button class="bank-btn" data-bank="Другой банк"><span class="bank-icon other">₽</span><span class="bank-info"><span class="bank-name">Другой банк</span><span class="bank-hint">Напиши в личку</span></span></button>
+    </div>
+    <div class="pay-note">🔒 Реквизиты карты приходят только в личке TikTok — безопасно</div>
+  </div>
+</section>
+
+<section class="wrap reveal" id="support">
+  <h3 class="title">Техподдержка</h3>
+  <p class="muted" style="margin-bottom:1.6rem">Есть вопрос, проблема или хочешь вернуть деньги? Напиши сюда.</p>
+  <div class="support-grid">
+    <button class="support-card" data-support="chat"><span class="sc-icon">💬</span><h4>Написать в поддержку</h4><p>Задай вопрос по заказу, эдиту, срокам. Отвечу в личке.</p></button>
+    <button class="support-card" data-support="refund"><span class="sc-icon">↩️</span><h4>Запросить возврат</h4><p>Если что-то не так — оставь заявку. Я рассмотрю и решу, делать возврат или нет.</p></button>
+    <button class="support-card" data-support="paid"><span class="sc-icon">🧾</span><h4>Я оплатил</h4><p>Отправь подтверждение оплаты — получишь код заказа и чек.</p></button>
+  </div>
+</section>
+
+<section class="wrap reveal" id="reviews">
+  <h3 class="title">Отзывы</h3>
+  <div class="reviews-head">
+    <div class="rating-summary">
+      <div class="big" id="avgRating">4.8</div>
+      <div>
+        <div class="stars" id="avgStars">★★★★★</div>
+        <div class="info">На основе <span id="reviewsCount">5</span> отзывов</div>
+      </div>
+    </div>
+    <p class="muted" style="max-width:420px">Реальные отзывы клиентов. Оставить свой можно прямо здесь — он появится в списке.</p>
+  </div>
+  <div class="reviews-grid" id="reviewsList"></div>
+  <div class="review-form">
+    <h4>Оставить отзыв</h4>
+    <form id="reviewForm" autocomplete="off">
+      <div class="field">
+        <label for="rName">Твоё имя</label>
+        <input type="text" id="rName" maxlength="30" placeholder="Например: Даниил" required>
+      </div>
+      <div class="field">
+        <label>Оценка</label>
+        <div class="star-picker" id="starPicker">
+          <span data-value="1">★</span><span data-value="2">★</span><span data-value="3">★</span><span data-value="4">★</span><span data-value="5">★</span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="rText">Твой отзыв</label>
+        <textarea id="rText" maxlength="300" placeholder="Расскажи, как всё прошло..." required></textarea>
+      </div>
+      <button class="btn" type="submit">Отправить отзыв</button>
+      <div class="form-msg" id="formMsg"></div>
+    </form>
+  </div>
+</section>
+
+<section class="wrap reveal" id="why">
+  <h3 class="title">Почему я</h3>
+  <div class="grid cols-3">
+    <div class="card tilt"><h4>💸 Доступные цены</h4><p>От 15 ₽.</p></div>
+    <div class="card tilt"><h4>🎨 Индивидуальный подход</h4><p>К каждой идее.</p></div>
+    <div class="card tilt"><h4>✨ 3D-стиль</h4><p>И современный монтаж.</p></div>
+    <div class="card tilt"><h4>⚡ Быстрая связь</h4><p>В TikTok, 24/7.</p></div>
+    <div class="card tilt"><h4>📁 Примеры работ</h4><p>В моём канале.</p></div>
+    <div class="card tilt"><h4>⭐ Качество</h4><p>Эдиты неплохие — стоят своих денег.</p></div>
+  </div>
+</section>
+
+<section class="wrap reveal faq" id="faq">
+  <h3 class="title">FAQ</h3>
+  <details><summary>Сколько делается эдит?</summary><p>Зависит от сложности. Обычно обсуждаем сроки после получения идеи.</p></details>
+  <details><summary>Можно ли срочно?</summary><p>Да, напиши в TikTok — договоримся.</p></details>
+  <details><summary>Что нужно для заказа?</summary><p>Клипы, трек, идея или референс. Если нет — помогу подобрать.</p></details>
+  <details><summary>Как оплатить?</summary><p>Выбери свой банк в разделе «Оплата» — покажу инструкцию. Реквизиты пришлю в личке TikTok после согласования заказа.</p></details>
+  <details><summary>Как я узнаю, что мой заказ принят?</summary><p>После оплаты нажми «Я оплатил» — получишь код заказа и чек. Я сразу увижу его у себя.</p></details>
+  <details><summary>А если не понравится?</summary><p>Всегда обсуждаем правки. Если совсем не подойдёт — оставь заявку на возврат в поддержке.</p></details>
+</section>
+
+<section class="wrap reveal" id="contacts">
+  <div class="contact-box" style="text-align:center;padding:3rem 1.5rem;border-radius:24px;background:linear-gradient(135deg,rgba(139,92,246,.22),rgba(236,72,153,.16),rgba(251,146,60,.12));border:1px solid var(--border);backdrop-filter:blur(14px);box-shadow:0 25px 70px rgba(139,92,246,.3)">
+    <h3 class="title" style="margin-bottom:.5rem">Контакты</h3>
+    <p>Хочешь стильный эдит? Пиши в TikTok:</p>
+    <div style="font-family:'Orbitron',sans-serif;font-size:clamp(1.6rem,5vw,3rem);font-weight:900;letter-spacing:.08em;background:linear-gradient(90deg,var(--blue),var(--pink),var(--yellow));-webkit-background-clip:text;background-clip:text;color:transparent;margin:.5rem 0 1.4rem;filter:drop-shadow(0 0 20px rgba(236,72,153,.5))">@xero4484</div>
+    <p class="muted" style="margin-bottom:1.6rem">Лёгкий — от 15 ₽. Сложный — от 30 ₽. Сделаем красиво. 🎬</p>
+    <a class="btn" href="https://www.tiktok.com/@xero4484" target="_blank" rel="noopener">Написать в TikTok</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <span>XERO4484</span> — заказные эдиты. Все права защищены.</p>
+  <p style="margin-top:1rem">
+    <button class="admin-trigger" id="adminTrigger">⚙️ Вход для администратора</button>
+  </p>
+</footer><div class="modal-overlay" id="payModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="payModalTitle">💳 Оплата</h3>
+      <button class="modal-close" data-close="payModal">✕</button>
+    </div>
+    <div id="payModalBody"></div>
+    <div style="margin-top:1.2rem;text-align:center">
+      <a class="btn" href="https://www.tiktok.com/@xero4484" target="_blank" rel="noopener">Написать в TikTok →</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="supportModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="supportModalTitle">🆘 Поддержка</h3>
+      <button class="modal-close" data-close="supportModal">✕</button>
+    </div>
+    <div class="bot-msg">
+      <div class="bot-icon">🤖</div>
+      <div class="bot-text"><b>Здравствуйте!</b> Как только админ будет в сети — он вам поможет.</div>
+    </div>
+    <form id="supportForm" autocomplete="off">
+      <input type="hidden" id="sType" value="chat">
+      <div class="field">
+        <label for="sName">Твоё имя</label>
+        <input type="text" id="sName" maxlength="30" placeholder="Например: Даниил" required>
+      </div>
+      <div class="field">
+        <label for="sTikTok">Твой TikTok (ник)</label>
+        <input type="text" id="sTikTok" maxlength="50" placeholder="@xero4484" required>
+      </div>
+      <div class="field" id="sAmountField" style="display:none">
+        <label for="sAmount">Сумма оплаты (₽)</label>
+        <input type="text" id="sAmount" maxlength="20" placeholder="Например: 30">
+      </div>
+      <div class="field" id="sBankField" style="display:none">
+        <label for="sBank">Каким банком оплатил</label>
+        <select id="sBank">
+          <option>Сбербанк</option>
+          <option>Т-Банк</option>
+          <option>ВТБ</option>
+          <option>Альфа-Банк</option>
+          <option>Другой</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="sText" id="sTextLabel">Твоё сообщение</label>
+        <textarea id="sText" maxlength="400" placeholder="Опиши ситуацию..." required></textarea>
+      </div>
+      <button class="btn" type="submit">Отправить</button>
+      <div class="form-msg" id="supportMsg"></div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="receiptModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>🧾 Твой чек</h3>
+      <button class="modal-close" data-close="receiptModal">✕</button>
+    </div>
+    <div id="receiptBody"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="passwordModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>🔐 Вход для администратора</h3>
+      <button class="modal-close" data-close="passwordModal">✕</button>
+    </div>
+    <form id="passwordForm" autocomplete="off">
+      <div class="field">
+        <label for="passwordInput">Введите пароль</label>
+        <input type="password" id="passwordInput" placeholder="••••••••" required>
+      </div>
+      <button class="btn" type="submit" style="width:100%">Войти</button>
+      <div class="form-msg" id="passwordMsg"></div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="adminModal">
+  <div class="modal wide">
+    <div class="modal-head">
+      <h3>🔧 Панель администратора</h3>
+      <button class="modal-close" data-close="adminModal">✕</button>
+    </div>
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="orders">📬 Заявки <span class="badge" id="badgeOrders">0</span></button>
+      <button class="admin-tab" data-tab="support">💬 Поддержка <span class="badge" id="badgeSupport">0</span></button>
+      <button class="admin-tab" data-tab="refunds">↩️ Возвраты <span class="badge" id="badgeRefunds">0</span></button>
+      <button class="admin-tab" data-tab="paid">🧾 Оплаты <span class="badge" id="badgePaid">0</span></button>
+    </div>
+    <div class="admin-content" id="adminContent"></div>
+  </div>
+</div><script>
+/* ===== НАВИГАЦИЯ + СКРОЛЛ ===== */
+const navbar = document.getElementById('navbar');
+addEventListener('scroll', ()=>{
+  navbar.classList.toggle('scrolled', scrollY > 40);
+  const h = document.documentElement;
+  const p = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById('progress').style.width = p + '%';
+});
+const navToggle = document.getElementById('navToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+navToggle.addEventListener('click', ()=>{
+  mobileMenu.classList.toggle('show');
+  navToggle.textContent = mobileMenu.classList.contains('show') ? '✕' : '☰';
+});
+document.querySelectorAll('.mobile-menu a').forEach(a=>{
+  a.addEventListener('click', ()=>{
+    mobileMenu.classList.remove('show');
+    navToggle.textContent = '☰';
+  });
+});
+
+/* ===== ПОЯВЛЕНИЕ СЕКЦИЙ ===== */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+/* ===== СЧЁТЧИКИ ===== */
+const counters = document.querySelectorAll('.num[data-count]');
+const counterObserver = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const el = e.target;
+      const target = +el.dataset.count;
+      let cur = 0;
+      const step = Math.max(1, Math.ceil(target/40));
+      const tick = ()=>{
+        cur += step;
+        if(cur >= target){ el.textContent = target; return; }
+        el.textContent = cur;
+        requestAnimationFrame(tick);
+      };
+      tick();
+      counterObserver.unobserve(el);
+    }
+  });
+},{threshold:.4});
+counters.forEach(c=>counterObserver.observe(c));
+
+/* ===== TILT КАРТОЧКИ ===== */
+document.querySelectorAll('.tilt').forEach(card=>{
+  card.addEventListener('mousemove', e=>{
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left, y = e.clientY - r.top;
+    const rx = ((y / r.height) - .5) * -12;
+    const ry = ((x / r.width) - .5) * 12;
+    card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(10px)`;
+    card.style.setProperty('--mx', (x/r.width*100)+'%');
+    card.style.setProperty('--my', (y/r.height*100)+'%');
+  });
+  card.addEventListener('mouseleave', ()=>{ card.style.transform = ''; });
+});
+
+/* ===== ЧАСТИЦЫ ===== */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W, H, parts = [];
+function resize(){ W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
+resize();
+addEventListener('resize', resize);
+const COLORS = ['rgba(139,92,246,','rgba(34,211,238,','rgba(236,72,153,','rgba(251,191,36,','rgba(251,146,60,','rgba(163,230,53,'];
+for(let i=0;i<90;i++){
+  parts.push({
+    x:Math.random()*W, y:Math.random()*H,
+    r:Math.random()*2+.5,
+    vx:(Math.random()-.5)*.4, vy:(Math.random()-.5)*.4,
+    c:COLORS[Math.floor(Math.random()*COLORS.length)],
+    a:Math.random()*.6+.2
+  });
+}
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  parts.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0)p.x=W; if(p.x>W)p.x=0;
+    if(p.y<0)p.y=H; if(p.y>H)p.y=0;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle = p.c + p.a + ')';
+    ctx.fill();
+  });
+  for(let i=0;i<parts.length;i++){
+    for(let j=i+1;j<parts.length;j++){
+      const dx=parts[i].x-parts[j].x, dy=parts[i].y-parts[j].y;
+      const d=Math.hypot(dx,dy);
+      if(d<120){
+        ctx.beginPath();
+        ctx.moveTo(parts[i].x,parts[i].y);
+        ctx.lineTo(parts[j].x,parts[j].y);
+        ctx.strokeStyle = `rgba(139,92,246,${(1-d/120)*.15})`;
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+
+/* ===== ПАРАЛЛАКС HERO ===== */
+const heroInner = document.querySelector('.hero-inner');
+addEventListener('mousemove', e=>{
+  const x = (e.clientX/innerWidth - .5) * 18;
+  const y = (e.clientY/innerHeight - .5) * 18;
+  heroInner.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+});
+
+/* ===== УТИЛИТЫ ===== */
+function escapeHtml(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function nowDate(){
+  const n = new Date();
+  return String(n.getDate()).padStart(2,'0') + '.' + String(n.getMonth()+1).padStart(2,'0') + '.' + n.getFullYear() + ' в ' + String(n.getHours()).padStart(2,'0') + ':' + String(n.getMinutes()).padStart(2,'0');
+}
+function load(k, d){ try{ const r = localStorage.getItem(k); if(r) return JSON.parse(r); }catch(e){} return d; }
+function save(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+function showMsg(el, text, type){
+  el.className = 'form-msg ' + type;
+  el.textContent = text;
+  if(type === 'ok') setTimeout(()=>{ el.className = 'form-msg'; }, 4500);
+}
+function genOrderCode(){
+  const L = 'ABCDEFGHJKLMNPQRSTUVWXYZ', D = '0123456789';
+  let a = '', b = '';
+  for(let i=0;i<3;i++) a += L[Math.floor(Math.random()*L.length)];
+  for(let i=0;i<4;i++) b += D[Math.floor(Math.random()*D.length)];
+  return a + '-' + b;
+}
+function openModal(id){ document.getElementById(id).classList.add('show'); document.body.style.overflow='hidden'; }
+function closeModal(id){ document.getElementById(id).classList.remove('show'); document.body.style.overflow=''; }
+document.querySelectorAll('.modal-close').forEach(btn=>{
+  btn.addEventListener('click', ()=>closeModal(btn.dataset.close));
+});
+document.querySelectorAll('.modal-overlay').forEach(m=>{
+  m.addEventListener('click', e=>{ if(e.target === m) closeModal(m.id); });
+});
+
+/* ===== ОТЗЫВЫ ===== */
+const REVIEWS_KEY = 'xero4484_reviews_v3';
+const DEFAULT_REVIEWS = [
+  { name:'Даниил', rating:5, text:'Заказал сложный эдит — получилось топ! Переходы плавные, всё по битам. Стоит своих денег, буду заказывать ещё.', date:'12.09.2025' },
+  { name:'Алина', rating:5, text:'Очень быстро сделал, всё как я хотела. Синхрон по музыке идеальный 🔥 Рекомендую!', date:'10.09.2025' },
+  { name:'Максим', rating:4, text:'Хороший эдит, всё сделал вовремя. Немного правок попросил — исправил быстро.', date:'08.09.2025' },
+  { name:'Кристина', rating:5, text:'Атмосфера в эдите просто вау! 3D-эффекты, свечение, цветокор — всё на месте. Спасибо!', date:'05.09.2025' },
+  { name:'Егор', rating:4, text:'Качество норм, цена вообще смешная. Эдиты неплохие получаются, стоят своих денег 👍', date:'03.09.2025' }
+];
+let reviews = load(REVIEWS_KEY, DEFAULT_REVIEWS.slice());
+const listEl = document.getElementById('reviewsList');
+const avgRatingEl = document.getElementById('avgRating');
+const avgStarsEl = document.getElementById('avgStars');
+const countEl = document.getElementById('reviewsCount');
+
+function starsStr(n){ const f = Math.round(n); return '★'.repeat(f) + '☆'.repeat(5-f); }
+function renderReviews(){
+  listEl.innerHTML = '';
+  reviews.forEach(r=>{
+    const initials = (r.name||'?').trim().charAt(0).toUpperCase();
+    const div = document.createElement('div');
+    div.className = 'review';
+    div.innerHTML = `<div class="top"><div class="who"><div class="avatar">${initials}</div>
+      <div><div class="name">${escapeHtml(r.name)}</div><div class="date">${r.date}</div></div></div></div>
+      <div class="stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
+      <p>${escapeHtml(r.text)}</p>`;
+    listEl.appendChild(div);
+  });
+  const avg = reviews.length ? (reviews.reduce((s,r)=>s+r.rating,0)/reviews.length) : 0;
+  avgRatingEl.textContent = avg.toFixed(1);
+  avgStarsEl.textContent = starsStr(avg);
+  countEl.textContent = reviews.length;
+}
+renderReviews();
+
+const starPicker = document.getElementById('starPicker');
+let chosenRating = 0;
+starPicker.querySelectorAll('span').forEach(star=>{
+  star.addEventListener('mouseenter', ()=>{
+    const v = +star.dataset.value;
+    starPicker.querySelectorAll('span').forEach(s=>s.classList.toggle('active', +s.dataset.value <= v));
+  });
+  star.addEventListener('click', ()=>{
+    chosenRating = +star.dataset.value;
+    starPicker.querySelectorAll('span').forEach(s=>s.classList.toggle('active', +s.dataset.value <= chosenRating));
+  });
+});
+starPicker.addEventListener('mouseleave', ()=>{
+  starPicker.querySelectorAll('span').forEach(s=>s.classList.toggle('active', +s.dataset.value <= chosenRating));
+});
+
+const reviewForm = document.getElementById('reviewForm');
+const reviewMsg = document.getElementById('formMsg');
+reviewForm.addEventListener('submit', e=>{
+  e.preventDefault();
+  const name = document.getElementById('rName').value.trim();
+  const text = document.getElementById('rText').value.trim();
+  if(!name || !text){ showMsg(reviewMsg,'Заполни имя и отзыв 🙂','err'); return; }
+  if(!chosenRating){ showMsg(reviewMsg,'Поставь оценку — нажми на звёзды ⭐','err'); return; }
+  reviews.unshift({ name, rating: chosenRating, text, date: nowDate().split(' в ')[0] });
+  save(REVIEWS_KEY, reviews);
+  renderReviews();
+  reviewForm.reset(); chosenRating = 0;
+  starPicker.querySelectorAll('span').forEach(s=>s.classList.remove('active'));
+  showMsg(reviewMsg,'Спасибо за отзыв! Он добавлен 💜','ok');
+  listEl.scrollIntoView({behavior:'smooth', block:'start'});
+});
+
+/* ===== ФОРМА ЗАЯВКИ ===== */
+const ORDERS_KEY = 'xero4484_orders_v3';
+const orderForm = document.getElementById('orderForm');
+const orderMsg = document.getElementById('orderMsg');
+
+orderForm.addEventListener('submit', e=>{
+  e.preventDefault();
+  const name = document.getElementById('oName').value.trim();
+  const tiktok = document.getElementById('oTikTok').value.trim();
+  const track = document.getElementById('oTrack').value.trim();
+  const idea = document.getElementById('oIdea').value.trim();
+  if(!name || !tiktok || !track || !idea){ showMsg(orderMsg,'Заполни все поля, пожалуйста!','err'); return; }
+  const orders = load(ORDERS_KEY, []);
+  orders.unshift({ name, tiktok, track, idea, date: nowDate(), status:'pending', code: genOrderCode() });
+  save(ORDERS_KEY, orders);
+  orderForm.reset();
+  showMsg(orderMsg,'Заявка принята! Я напишу тебе в TikTok в ближайшее время. 💛','ok');
+  updateBadges();
+});
+</script><script>
+/* ===== ПОДДЕРЖКА ===== */
+const SUPPORT_KEY = 'xero4484_support_v3';
+const supportForm = document.getElementById('supportForm');
+const supportMsg = document.getElementById('supportMsg');
+const sType = document.getElementById('sType');
+const sAmountField = document.getElementById('sAmountField');
+const sBankField = document.getElementById('sBankField');
+const sTextLabel = document.getElementById('sTextLabel');
+const sText = document.getElementById('sText');
+const supportModalTitle = document.getElementById('supportModalTitle');
+
+document.querySelectorAll('.support-card').forEach(card=>{
+  card.addEventListener('click', ()=>{
+    const type = card.dataset.support;
+    sType.value = type;
+    sAmountField.style.display = 'none';
+    sBankField.style.display = 'none';
+    if(type === 'chat'){
+      supportModalTitle.textContent = '💬 Написать в поддержку';
+      sTextLabel.textContent = 'Твой вопрос';
+      sText.placeholder = 'Опиши свой вопрос...';
+    } else if(type === 'refund'){
+      supportModalTitle.textContent = '↩️ Запросить возврат';
+      sAmountField.style.display = 'block';
+      sBankField.style.display = 'block';
+      sTextLabel.textContent = 'Причина возврата';
+      sText.placeholder = 'Почему хочешь вернуть деньги?';
+    } else if(type === 'paid'){
+      supportModalTitle.textContent = '🧾 Я оплатил';
+      sAmountField.style.display = 'block';
+      sBankField.style.display = 'block';
+      sTextLabel.textContent = 'Комментарий (необязательно)';
+      sText.placeholder = 'Время перевода, комментарий...';
+    }
+    supportForm.reset();
+    sType.value = type;
+    openModal('supportModal');
+  });
+});
+
+supportForm.addEventListener('submit', e=>{
+  e.preventDefault();
+  const type = sType.value;
+  const name = document.getElementById('sName').value.trim();
+  const tiktok = document.getElementById('sTikTok').value.trim();
+  const text = document.getElementById('sText').value.trim();
+  const amount = document.getElementById('sAmount').value.trim();
+  const bank = document.getElementById('sBank').value;
+
+  if(!name || !tiktok || !text){ showMsg(supportMsg,'Заполни все поля','err'); return; }
+  if((type === 'refund' || type === 'paid') && !amount){ showMsg(supportMsg,'Укажи сумму','err'); return; }
+
+  const list = load(SUPPORT_KEY, []);
+
+  if(type === 'paid'){
+    const code = genOrderCode();
+    list.unshift({ type, name, tiktok, text, amount, bank, date: nowDate(), status: 'paid', code });
+    save(SUPPORT_KEY, list);
+    showReceipt({ name, tiktok, amount, bank, code, date: nowDate() });
+    showMsg(supportMsg,'Спасибо! Оплата получена, приступаю к работе 💛','ok');
+    setTimeout(()=>{ closeModal('supportModal'); updateBadges(); }, 800);
+    return;
+  }
+
+  if(type === 'refund'){
+    list.unshift({ type, name, tiktok, text, amount, bank, date: nowDate(), status: 'pending' });
+    save(SUPPORT_KEY, list);
+    showMsg(supportMsg,'Заявка на возврат отправлена. Я рассмотрю её и напишу тебе 💜','ok');
+    setTimeout(()=>{ closeModal('supportModal'); updateBadges(); }, 1800);
+    return;
+  }
+
+  list.unshift({ type, name, tiktok, text, amount:'', bank:'', date: nowDate(), status:'pending' });
+  save(SUPPORT_KEY, list);
+  showMsg(supportMsg,'🤖 Здравствуйте! Как только админ будет в сети — он вам поможет.','ok');
+  setTimeout(()=>{ closeModal('supportModal'); updateBadges(); }, 2500);
+});
+
+/* ===== ЧЕК ===== */
+function showReceipt(data){
+  const body = document.getElementById('receiptBody');
+  body.innerHTML = `
+    <div class="receipt">
+      <div class="r-top">
+        <div class="r-logo">XERO4484</div>
+        <div class="r-sub">Эдит · Чек об оплате</div>
+      </div>
+      <div class="r-row"><span>Клиент:</span><b>${escapeHtml(data.name)}</b></div>
+      <div class="r-row"><span>TikTok:</span><b>${escapeHtml(data.tiktok)}</b></div>
+      <div class="r-row"><span>Банк:</span><b>${escapeHtml(data.bank)}</b></div>
+      <div class="r-row"><span>Сумма:</span><b>${escapeHtml(data.amount)} ₽</b></div>
+      <div class="r-row"><span>Дата:</span><b>${data.date}</b></div>
+      <div class="r-code-label">Код вашего заказа</div>
+      <div class="r-code">${data.code}</div>
+      <div class="r-status">✅ Оплата принята — скоро ваш эдит будет готов!</div>
+      <div class="r-thanks">Сохрани этот код — по нему я найду твой заказ 💜</div>
+    </div>
+  `;
+  openModal('receiptModal');
+}
+
+/* ===== ОПЛАТА — БАНКИ ===== */
+const payModalTitle = document.getElementById('payModalTitle');
+const payModalBody = document.getElementById('payModalBody');
+
+document.querySelectorAll('.bank-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const bank = btn.dataset.bank;
+    payModalTitle.textContent = `💳 Оплата — ${bank}`;
+    payModalBody.innerHTML = `
+      <div class="pay-step"><span class="num">1</span> Напиши мне в <b>TikTok @xero4484</b>.</div>
+      <div class="pay-step"><span class="num">2</span> Скажи, что оплачиваешь через <b>${escapeHtml(bank)}</b>.</div>
+      <div class="pay-step"><span class="num">3</span> Я пришлю тебе <b>номер карты</b> в личку.</div>
+      <div class="pay-step"><span class="num">4</span> Переведи нужную сумму через ${escapeHtml(bank)}.</div>
+      <div class="pay-step"><span class="num">5</span> Нажми «Я оплатил» в техподдержке — получишь код заказа и чек.</div>
+      <p style="text-align:center;color:var(--muted);font-size:.9rem;margin-top:1rem">🔒 Номер карты виден только тебе и только в личке</p>
+    `;
+    openModal('payModal');
+  });
+});
+
+/* ===== АДМИНКА ПО ПАРОЛЮ ===== */
+const ADMIN_PASSWORD = 'ARSENIY1488';
+const adminTrigger = document.getElementById('adminTrigger');
+const passwordForm = document.getElementById('passwordForm');
+const passwordMsg = document.getElementById('passwordMsg');
+let adminUnlocked = false;
+let currentTab = 'orders';
+
+adminTrigger.addEventListener('click', ()=>{
+  if(adminUnlocked){ renderAdmin(currentTab); openModal('adminModal'); return; }
+  passwordForm.reset();
+  openModal('passwordModal');
+});
+
+passwordForm.addEventListener('submit', e=>{
+  e.preventDefault();
+  const val = document.getElementById('passwordInput').value;
+  if(val === ADMIN_PASSWORD){
+    adminUnlocked = true;
+    closeModal('passwordModal');
+    renderAdmin('orders');
+    openModal('adminModal');
+  } else {
+    showMsg(passwordMsg,'Неверный пароль ❌','err');
+  }
+});
+
+const adminContent = document.getElementById('adminContent');
+document.querySelectorAll('.admin-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    currentTab = tab.dataset.tab;
+    renderAdmin(currentTab);
+  });
+});
+
+function updateBadges(){
+  const orders = load(ORDERS_KEY, []);
+  const support = load(SUPPORT_KEY, []);
+  const refunds = support.filter(s=>s.type==='refund');
+  const paid = support.filter(s=>s.type==='paid');
+  const chats = support.filter(s=>s.type==='chat');
+  const b1 = document.getElementById('badgeOrders'); if(b1) b1.textContent = orders.length;
+  const b2 = document.getElementById('badgeSupport'); if(b2) b2.textContent = chats.length;
+  const b3 = document.getElementById('badgeRefunds'); if(b3) b3.textContent = refunds.length;
+  const b4 = document.getElementById('badgePaid'); if(b4) b4.textContent = paid.length;
+}
+
+function renderAdmin(tab){
+  updateBadges();
+  let items = [];
+  if(tab === 'orders') items = load(ORDERS_KEY, []);
+  if(tab === 'support') items = load(SUPPORT_KEY, []).filter(s=>s.type==='chat');
+  if(tab === 'refunds') items = load(SUPPORT_KEY, []).filter(s=>s.type==='refund');
+  if(tab === 'paid') items = load(SUPPORT_KEY, []).filter(s=>s.type==='paid');
+
+  if(items.length === 0){
+    adminContent.innerHTML = '<div class="empty-orders"><span class="icon">📭</span>Пока пусто</div>';
+    return;
+  }
+
+  adminContent.innerHTML = '';
+  items.forEach((o, idx)=>{
+    const initials = (o.name||'?').trim().charAt(0).toUpperCase();
+    const colorClass = tab==='orders' ? 'blue' : tab==='support' ? 'green' : tab==='refunds' ? 'yellow' : 'pink';
+
+    let statusHtml = '';
+    if(o.status === 'pending') statusHtml = '<span class="status pending">⏳ Ожидает</span>';
+    if(o.status === 'approved') statusHtml = '<span class="status approved">✅ Одобрено</span>';
+    if(o.status === 'rejected') statusHtml = '<span class="status rejected">❌ Отклонено</span>';
+    if(o.status === 'paid') statusHtml = '<span class="status paid">💳 Оплачено</span>';
+
+    let rows = '';
+    if(tab === 'orders'){
+      const tc = (o.tiktok||'').replace(/^@/, '');
+      const tlink = tc ? `https://www.tiktok.com/@${encodeURIComponent(tc)}` : '#';
+      rows = `
+        <div class="row"><span class="k">TikTok</span><span class="v"><a href="${tlink}" target="_blank" rel="noopener">${escapeHtml(o.tiktok)}</a></span></div>
+        <div class="row"><span class="k">Трек</span><span class="v">${escapeHtml(o.track)}</span></div>
+        <div class="idea">💡 ${escapeHtml(o.idea)}</div>
+        ${o.code ? `<div class="order-code">Код: ${o.code}</div>` : ''}
+      `;
+    } else if(tab === 'refunds'){
+      rows = `
+        <div class="row"><span class="k">TikTok</span><span class="v">${escapeHtml(o.tiktok)}</span></div>
+        <div class="row"><span class="k">Сумма</span><span class="v">${escapeHtml(o.amount)} ₽</span></div>
+        <div class="row"><span class="k">Банк</span><span class="v">${escapeHtml(o.bank)}</span></div>
+        <div class="idea">⚠️ <b>${escapeHtml(o.tiktok)}</b> (${escapeHtml(o.name)}) хочет оформить возврат по причине: <b>${escapeHtml(o.text)}</b></div>
+      `;
+    } else if(tab === 'paid'){
+      rows = `
+        <div class="row"><span class="k">TikTok</span><span class="v">${escapeHtml(o.tiktok)}</span></div>
+        <div class="row"><span class="k">Сумма</span><span class="v">${escapeHtml(o.amount)} ₽</span></div>
+        <div class="row"><span class="k">Банк</span><span class="v">${escapeHtml(o.bank)}</span></div>
+        <div class="idea">💬 ${escapeHtml(o.text) || '—'}</div>
+        ${o.code ? `<div class="order-code">Код: ${o.code}</div>` : ''}
+      `;
+    } else {
+      rows = `
+        <div class="row"><span class="k">TikTok</span><span class="v">${escapeHtml(o.tiktok)}</span></div>
+        <div class="idea">💬 ${escapeHtml(o.text)}</div>
+      `;
+    }
+
+    const actions = (tab === 'refunds' && o.status === 'pending') ? `
+      <div class="admin-actions">
+        <button class="approve" data-action="approve" data-idx="${idx}">✅ Одобрить возврат</button>
+        <button class="reject" data-action="reject" data-idx="${idx}">❌ Отклонить</button>
+      </div>
+    ` : '';
+
+    const div = document.createElement('div');
+    div.className = 'admin-item';
+    div.innerHTML = `
+      <div class="head">
+        <div class="avatar ${colorClass}">${initials}</div>
+        <div class="who">
+          <div class="name">${escapeHtml(o.name)}</div>
+          <div class="date">📅 ${o.date} ${statusHtml}</div>
+        </div>
+      </div>
+      ${rows}
+      ${actions}
+    `;
+    adminContent.appendChild(div);
+  });
+
+  adminContent.querySelectorAll('button[data-action]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const action = btn.dataset.action;
+      const idx = +btn.dataset.idx;
+      const supportList = load(SUPPORT_KEY, []);
+      const refunds = supportList.filter(s=>s.type==='refund');
+      const target = refunds[idx];
+      if(!target) return;
+      const realIdx = supportList.indexOf(target);
+      if(action === 'approve') supportList[realIdx].status = 'approved';
+      if(action === 'reject') supportList[realIdx].status = 'rejected';
+      save(SUPPORT_KEY, supportList);
+      renderAdmin(currentTab);
+    });
+  });
+}
+
+updateBadges();
+</script>
+</body>
+</html>

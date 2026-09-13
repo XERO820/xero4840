@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XERO4484 — заказные эдиты | Цены от 15 ₽</title>
+<meta name="description" content="Заказные эдиты в TikTok от xero4484. Лёгкие — 15–25 ₽, сложные — 30–50 ₽. Пиши в TikTok: @xero4484.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05030f;--purple:#8b5cf6;--blue:#22d3ee;--pink:#ec4899;
+  --yellow:#fbbf24;--green:#10b981;--orange:#fb923c;--lime:#a3e635;
+  --text:#e8e6f5;--muted:#9b95b8;
+  --card:rgba(20,15,45,.55);--border:rgba(139,92,246,.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Rajdhani',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;padding-top:80px}
+@media (max-width:768px){body{padding-top:72px}}
+#bg-canvas{position:fixed;inset:0;z-index:-3;
+  background:
+    radial-gradient(ellipse at 15% 10%, rgba(139,92,246,.35), transparent 50%),
+    radial-gradient(ellipse at 85% 25%, rgba(34,211,238,.28), transparent 50%),
+    radial-gradient(ellipse at 50% 95%, rgba(236,72,153,.30), transparent 55%),
+    linear-gradient(180deg,#05030f 0%,#0b0620 100%)}
+#particles{position:fixed;inset:0;z-index:-2;pointer-events:none}
+.orb{position:fixed;border-radius:50%;filter:blur(90px);opacity:.55;z-index:-1;pointer-events:none;animation:orbFloat 20s ease-in-out infinite}
+.orb.o1{width:360px;height:360px;background:var(--purple);top:-90px;left:-90px}
+.orb.o2{width:300px;height:300px;background:var(--pink);bottom:8%;right:-70px;animation-delay:-6s}
+.orb.o3{width:260px;height:260px;background:var(--blue);top:40%;left:-70px;animation-delay:-12s}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(50px,-40px) scale(1.18)}}
+#progress{position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--purple),var(--blue),var(--pink),var(--yellow),var(--green),var(--purple));
+  background-size:200% 100%;z-index:1000;box-shadow:0 0 15px rgba(139,92,246,.9);
+  transition:width .1s;animation:rainbow 6s linear infinite}
+@keyframes rainbow{to{background-position:200% 0}}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:999;padding:.7rem 1.2rem;
+  background:rgba(10,6,32,.72);backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid rgba(139,92,246,.28);box-shadow:0 8px 32px rgba(0,0,0,.5);
+  transition:padding .3s ease, background .3s}
+.navbar.scrolled{padding:.45rem 1.2rem;background:rgba(10,6,32,.9)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.nav-logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.2rem;letter-spacing:.1em;
+  background:linear-gradient(90deg,var(--purple),var(--blue),var(--pink),var(--yellow),var(--lime),var(--purple));
+  background-size:400% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:shine 8s linear infinite;text-decoration:none;flex-shrink:0;display:flex;align-items:center;gap:.5rem}
+.nav-logo .dot{width:10px;height:10px;border-radius:50%;
+  background:linear-gradient(135deg,var(--pink),var(--yellow));box-shadow:0 0 12px var(--pink);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.7}}
+@keyframes shine{to{background-position:400% 0}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<canvas id="bg-canvas"></canvas>
+<canvas id="particles"></canvas>
+<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>

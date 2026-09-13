@@ -1021,20 +1021,32 @@ reviewForm.addEventListener('submit', e=>{
 const ORDERS_KEY = 'xero4484_orders_v3';
 const orderForm = document.getElementById('orderForm');
 const orderMsg = document.getElementById('orderMsg');
-
-orderForm.addEventListener('submit', e=>{
+orderForm.addEventListener('submit', async (e)=>{
   e.preventDefault();
   const name = document.getElementById('oName').value.trim();
   const tiktok = document.getElementById('oTikTok').value.trim();
   const track = document.getElementById('oTrack').value.trim();
   const idea = document.getElementById('oIdea').value.trim();
   if(!name || !tiktok || !track || !idea){ showMsg(orderMsg,'Заполни все поля, пожалуйста!','err'); return; }
-  const orders = load(ORDERS_KEY, []);
-  orders.unshift({ name, tiktok, track, idea, date: nowDate(), status:'pending', code: genOrderCode() });
-  save(ORDERS_KEY, orders);
-  orderForm.reset();
-  showMsg(orderMsg,'Заявка принята! Я напишу тебе в TikTok в ближайшее время. 💛','ok');
-  updateBadges();
+  try {
+    const res = await fetch(orderForm.action, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(orderForm)
+    });
+    if(res.ok){
+      const orders = load(ORDERS_KEY, []);
+      orders.unshift({ name, tiktok, track, idea, date: nowDate(), status:'pending', code: genOrderCode() });
+      save(ORDERS_KEY, orders);
+      orderForm.reset();
+      showMsg(orderMsg,'Заявка принята! Я напишу тебе в TikTok в ближайшее время. 💛','ok');
+      updateBadges();
+    } else {
+      showMsg(orderMsg,'Ошибка отправки. Попробуй ещё раз.','err');
+    }
+  } catch(err){
+    showMsg(orderMsg,'Ошибка сети. Проверь интернет.','err');
+  }
 });
 </script><script>
 /* ===== ПОДДЕРЖКА ===== */

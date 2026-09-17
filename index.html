@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>XERO4484 — заказные эдиты | Цены от 15 ₽</title>
 <meta name="description" content="Заказные эдиты в TikTok от xero4484. Лёгкие — 15–25 ₽, сложные — 30–50 ₽. Пиши в TikTok: @xero4484.">
+<meta name="keywords" content="эдиты, заказ эдитов, тикток эдиты, xero4484, монтаж видео">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -50,10 +51,7 @@ body{font-family:'Rajdhani',sans-serif;background:var(--bg);color:var(--text);ov
   background:linear-gradient(135deg,var(--pink),var(--yellow));box-shadow:0 0 12px var(--pink);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.7}}
 @keyframes shine{to{background-position:400% 0}}
-<div id="progress"></div>
-<canvas id="bg-canvas"></canvas>
-<canvas id="particles"></canvas>
-<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>.nav-links{display:flex;align-items:center;gap:.2rem;flex-wrap:wrap}
+.nav-links{display:flex;align-items:center;gap:.2rem;flex-wrap:wrap}
 .nav-link{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.98rem;
   color:#d8d4ec;text-decoration:none;padding:.55rem .95rem;border-radius:12px;
   position:relative;transition:all .3s ease;display:flex;align-items:center;gap:.4rem;white-space:nowrap}
@@ -146,14 +144,10 @@ p, li{font-size:1.08rem;color:#d8d4ec}
 .grid{display:grid;gap:1.5rem}
 .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
 .grid.cols-3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-.grid.cols-4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.8rem;
-  backdrop-filter:blur(14px);transform-style:preserve-3d;
-  transition:transform .25s ease, border-color .3s, box-shadow .3s;
+.grid.cols-4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.8rem;
+  backdrop-filter:blur(14px);transition:transform .25s ease, border-color .3s, box-shadow .3s;
   box-shadow:0 20px 45px rgba(0,0,0,.4);position:relative;overflow:hidden}
-.card::before{content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(139,92,246,.25),transparent 60%);
-  opacity:0;transition:opacity .3s}
-.card:hover::before{opacity:1}
 .card:hover{border-color:rgba(236,72,153,.55);box-shadow:0 25px 65px rgba(139,92,246,.4)}
 .card h4{font-family:'Orbitron',sans-serif;font-size:1.15rem;letter-spacing:.04em;margin-bottom:.7rem;color:#fff}
 .video-preview{width:100%;aspect-ratio:9/16;max-height:420px;border-radius:12px;margin-bottom:1rem;
@@ -249,9 +243,9 @@ p, li{font-size:1.08rem;color:#d8d4ec}
   display:flex;justify-content:space-between;align-items:center;color:#fff}
 .faq summary::after{content:'+';font-family:'Orbitron',sans-serif;color:var(--pink);font-size:1.4rem;transition:transform .3s}
 .faq details[open] summary::after{transform:rotate(45deg)}
-.faq p{margin-top:.8rem;color:var(--muted)}.pay-card{background:linear-gradient(135deg,rgba(139,92,246,.22),rgba(236,72,153,.15),rgba(34,211,238,.15));
-  border:1px solid var(--border);border-radius:24px;
-  padding:2.5rem 1.5rem;text-align:center;
+.faq p{margin-top:.8rem;color:var(--muted)}
+.pay-card{background:linear-gradient(135deg,rgba(139,92,246,.22),rgba(236,72,153,.15),rgba(34,211,238,.15));
+  border:1px solid var(--border);border-radius:24px;padding:2.5rem 1.5rem;text-align:center;
   backdrop-filter:blur(14px);box-shadow:0 20px 55px rgba(0,0,0,.4)}
 .pay-card .icon{font-size:2.8rem;margin-bottom:.8rem;filter:drop-shadow(0 0 20px rgba(236,72,153,.7))}
 .pay-card h4{font-family:'Orbitron',sans-serif;font-size:1.3rem;color:#fff;margin-bottom:1rem;letter-spacing:.05em}
@@ -395,6 +389,7 @@ p, li{font-size:1.08rem;color:#d8d4ec}
   border:1px solid var(--border);background:var(--card);color:#fff;transition:all .25s}
 .admin-actions button.approve:hover{border-color:var(--green);color:var(--green)}
 .admin-actions button.reject:hover{border-color:#f87171;color:#f87171}
+.admin-actions button.reply:hover{border-color:var(--blue);color:var(--blue)}
 .empty-orders{text-align:center;padding:3rem 1rem;color:var(--muted);font-size:1.05rem;grid-column:1/-1}
 .empty-orders .icon{font-size:3rem;display:block;margin-bottom:.8rem;opacity:.6}
 .bot-msg{background:linear-gradient(135deg,rgba(34,211,238,.18),rgba(139,92,246,.18));
@@ -407,6 +402,28 @@ p, li{font-size:1.08rem;color:#d8d4ec}
   display:grid;place-items:center;font-size:1.2rem;
   box-shadow:0 0 15px rgba(34,211,238,.5);animation:pulse 2s infinite}
 .bot-msg .bot-text b{color:var(--blue)}
+.support-reply{background:linear-gradient(135deg,rgba(34,211,238,.15),rgba(139,92,246,.15));
+  border:1px solid rgba(34,211,238,.4);
+  border-radius:14px;padding:1.1rem 1.3rem;
+  margin-top:1rem}
+.support-reply .head{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem}
+.support-reply .head .ic{width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),var(--purple));
+  display:grid;place-items:center;font-size:1rem}
+.support-reply .head .who{font-weight:700;color:var(--blue)}
+.support-reply .head .when{font-size:.8rem;color:var(--muted);margin-left:auto}
+.support-reply .text{color:#d8d4ec;font-size:1rem}
+.reply-box{display:none;margin-top:1rem}
+.reply-box.show{display:block}
+.reply-box textarea{width:100%;padding:.9rem 1.1rem;border-radius:12px;
+  background:rgba(0,0,0,.35);border:1px solid var(--border);color:#fff;
+  font-family:inherit;font-size:1rem;min-height:80px;resize:vertical}
+.reply-box textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(34,211,238,.15)}
+.reply-box button{margin-top:.6rem;font-family:'Rajdhani',sans-serif;font-weight:700;
+  font-size:.95rem;padding:.6rem 1.2rem;border-radius:10px;cursor:pointer;
+  border:none;background:linear-gradient(135deg,var(--blue),var(--purple));
+  color:#fff;transition:transform .2s}
+.reply-box button:hover{transform:translateY(-2px)}
 footer{text-align:center;padding:2.5rem 1rem;border-top:1px solid var(--border);
   color:var(--muted);font-size:.95rem}
 footer span{color:var(--pink)}
@@ -421,7 +438,7 @@ footer span{color:var(--pink)}
   .admin-content{grid-template-columns:1fr}
   .admin-item .row .k{flex:0 0 65px;font-size:.78rem}
   .receipt .r-code{font-size:1.4rem;letter-spacing:.15em}
-  }
+}
 </style>
 </head>
 <body>
@@ -430,8 +447,8 @@ footer span{color:var(--pink)}
 <canvas id="particles"></canvas>
 <div class="orb o1"></div>
 <div class="orb o2"></div>
-<div class="orb o3"></div>
-  <nav class="navbar" id="navbar"
+<div class="orb o3"></div><nav class="navbar" id="navbar">
+  <div class="nav-inner">
     <a class="nav-logo" href="#top"><span class="dot"></span>XERO4484</a>
     <div class="nav-links">
       <a class="nav-link" href="#about"><span class="ico">🌸</span> О канале</a>
@@ -500,13 +517,13 @@ footer span{color:var(--pink)}
   <h3 class="title">Примеры работ</h3>
   <p class="muted" style="margin-bottom:1.8rem">Короткие превью моих эдитов. Полные версии — в TikTok @xero4484.</p>
   <div class="grid cols-2">
-    <div class="card tilt">
+    <div class="card">
       <a href="https://vt.tiktok.com/ZSquw6WNE/" target="_blank" rel="noopener" class="video-preview">🎵</a>
       <h4>Эдит под фонк</h4>
       <p>Синхрон по битам, 3D-переходы, свечение.</p>
       <a href="https://vt.tiktok.com/ZSquw6WNE/" target="_blank" rel="noopener" class="btn ghost small" style="margin-top:1rem">Смотреть в TikTok →</a>
     </div>
-    <div class="card tilt">
+    <div class="card">
       <a href="https://vt.tiktok.com/ZSquTtdfv/" target="_blank" rel="noopener" class="video-preview">😂</a>
       <h4>Мем-эдит</h4>
       <p>Тряска, глитч, маски, быстрый ритм.</p>
@@ -518,35 +535,15 @@ footer span{color:var(--pink)}
   </div>
 </section>
 
-<section class="wrap reveal" id="edit">
-  <h3 class="title">Что такое эдит?</h3>
-  <p style="margin-bottom:1.6rem">Эдит — это короткое видео, собранное под музыку с эффектами, переходами и стилем.</p>
-  <div class="grid cols-2">
-    <div class="card tilt"><h4>🌱 Простой эдит</h4><p>Пара клипов, минимум эффектов, быстрый монтаж.</p></div>
-    <div class="card tilt"><h4>🔥 Сложный эдит</h4><p>3D-переходы, маски, тряска, свечение, цветокор, синхронизация по битам.</p></div>
-  </div>
-</section>
-
-<section class="wrap reveal" id="services">
-  <h3 class="title">Услуги</h3>
-  <p style="margin-bottom:1.6rem">Заказные эдиты под ключ:</p>
-  <div class="grid cols-2">
-    <div class="card tilt"><h4>🎵 Монтаж под трек</h4></div>
-    <div class="card tilt"><h4>💧 Ваша водянка</h4></div>
-    <div class="card tilt"><h4>🎯 Синхронизация с музыкой</h4></div>
-    <div class="card tilt"><h4>🎬 Финальный рендер в хорошем качестве</h4></div>
-  </div>
-</section>
-
 <section class="wrap reveal" id="prices">
   <h3 class="title">Цены</h3>
   <div class="grid cols-2">
-    <div class="card tilt price-card">
+    <div class="card price-card">
       <h4>Лёгкий эдит</h4>
       <div class="amount">15–25 ₽</div>
       <p>Простой, но красивый эдит: нарезка, базовая синхронизация, минимум эффектов.</p>
     </div>
-    <div class="card tilt price-card hot">
+    <div class="card price-card hot">
       <span class="tag">Топ</span>
       <h4>Сложноватый эдит</h4>
       <div class="amount">30–50 ₽</div>
@@ -559,10 +556,10 @@ footer span{color:var(--pink)}
 <section class="wrap reveal" id="terms">
   <h3 class="title">Что ты получаешь</h3>
   <div class="grid cols-2">
-    <div class="card tilt"><h4>📁 Готовый файл</h4><p>MP4 1080p, вертикальный 9:16, без водяных знаков (если не просил).</p></div>
-    <div class="card tilt"><h4>📝 До 3 правок</h4><p>Бесплатно. Если что-то не так — исправим.</p></div>
-    <div class="card tilt"><h4>⏳ Срок</h4><p>От 1 до 3 дней. Срочные заказы — по договорённости.</p></div>
-    <div class="card tilt"><h4>❌ Исходники</h4><p>Не передаю (проект, слои, эффекты). Только готовый файл.</p></div>
+    <div class="card"><h4>📁 Готовый файл</h4><p>MP4 1080p, вертикальный 9:16, без водяных знаков (если не просил).</p></div>
+    <div class="card"><h4>📝 До 3 правок</h4><p>Бесплатно. Если что-то не так — исправим.</p></div>
+    <div class="card"><h4>⏳ Срок</h4><p>От 1 до 3 дней. Срочные заказы — по договорённости.</p></div>
+    <div class="card"><h4>❌ Исходники</h4><p>Не передаю (проект, слои, эффекты). Только готовый файл.</p></div>
   </div>
 </section>
 
@@ -579,21 +576,22 @@ footer span{color:var(--pink)}
 
 <section class="wrap reveal" id="order-form">
   <h3 class="title">Заказать эдит</h3>
-  <form id="orderForm" action="https://formspree.io/f/mppzgqna" method="POST" autocomplete="off">   <div class="field">
+  <form id="orderForm" action="https://formspree.io/f/mppzgqna" method="POST" autocomplete="off">
+    <div class="field">
       <label for="oName">Твоё имя</label>
-      <input type="text" id="oName" maxlength="30" placeholder="Например: Даниил" required>
+      <input type="text" id="oName" name="name" maxlength="30" placeholder="Например: Даниил" required>
     </div>
     <div class="field">
       <label for="oTikTok">Твой TikTok (ник)</label>
-      <input type="text" id="oTikTok" maxlength="50" placeholder="@xero4484" required>
+      <input type="text" id="oTikTok" name="tiktok" maxlength="50" placeholder="@xero4484" required>
     </div>
     <div class="field">
       <label for="oTrack">Трек/ссылка</label>
-      <input type="text" id="oTrack" maxlength="200" placeholder="Ссылка на трек или название" required>
+      <input type="text" id="oTrack" name="track" maxlength="200" placeholder="Ссылка на трек или название" required>
     </div>
     <div class="field">
       <label for="oIdea">Идея/референс (коротко)</label>
-      <textarea id="oIdea" maxlength="400" placeholder="Что хочешь видеть: стиль, эффекты, настроение..." required></textarea>
+      <textarea id="oIdea" name="idea" maxlength="400" placeholder="Что хочешь видеть: стиль, эффекты, настроение..." required></textarea>
     </div>
     <button class="btn" type="submit">Отправить заявку</button>
     <div class="form-msg" id="orderMsg"></div>
@@ -625,6 +623,8 @@ footer span{color:var(--pink)}
     <button class="support-card" data-support="refund"><span class="sc-icon">↩️</span><h4>Запросить возврат</h4><p>Если что-то не так — оставь заявку. Я рассмотрю и решу, делать возврат или нет.</p></button>
     <button class="support-card" data-support="paid"><span class="sc-icon">🧾</span><h4>Я оплатил</h4><p>Отправь подтверждение оплаты — получишь код заказа и чек.</p></button>
   </div>
+
+  <div id="userReplies" style="margin-top:2rem"></div>
 </section>
 
 <section class="wrap reveal" id="reviews">
@@ -663,26 +663,15 @@ footer span{color:var(--pink)}
   </div>
 </section>
 
-<section class="wrap reveal" id="why">
-  <h3 class="title">Почему я</h3>
-  <div class="grid cols-3">
-    <div class="card tilt"><h4>💸 Доступные цены</h4><p>От 15 ₽.</p></div>
-    <div class="card tilt"><h4>🎨 Индивидуальный подход</h4><p>К каждой идее.</p></div>
-    <div class="card tilt"><h4>✨ 3D-стиль</h4><p>И современный монтаж.</p></div>
-    <div class="card tilt"><h4>⚡ Быстрая связь</h4><p>В TikTok, 24/7.</p></div>
-    <div class="card tilt"><h4>📁 Примеры работ</h4><p>В моём канале.</p></div>
-    <div class="card tilt"><h4>⭐ Качество</h4><p>Эдиты неплохие — стоят своих денег.</p></div>
-  </div>
-</section>
-
-<section class="wrap reveal faq" id="faq">
+<section class="wrap reveal" id="faq">
   <h3 class="title">FAQ</h3>
-  <details><summary>Сколько делается эдит?</summary><p>Зависит от сложности. Обычно обсуждаем сроки после получения идеи.</p></details>
-  <details><summary>Можно ли срочно?</summary><p>Да, напиши в TikTok — договоримся.</p></details>
-  <details><summary>Что нужно для заказа?</summary><p>Клипы, трек, идея или референс. Если нет — помогу подобрать.</p></details>
-  <details><summary>Как оплатить?</summary><p>Выбери свой банк в разделе «Оплата» — покажу инструкцию. Реквизиты пришлю в личке TikTok после согласования заказа.</p></details>
-  <details><summary>Как я узнаю, что мой заказ принят?</summary><p>После оплаты нажми «Я оплатил» — получишь код заказа и чек. Я сразу увижу его у себя.</p></details>
-  <details><summary>А если не понравится?</summary><p>Всегда обсуждаем правки. Если совсем не подойдёт — оставь заявку на возврат в поддержке.</p></details>
+  <div class="faq">
+    <details><summary>Сколько делается эдит?</summary><p>Зависит от сложности. Обычно обсуждаем сроки после получения идеи.</p></details>
+    <details><summary>Можно ли срочно?</summary><p>Да, напиши в TikTok — договоримся.</p></details>
+    <details><summary>Что нужно для заказа?</summary><p>Клипы, трек, идея или референс. Если нет — помогу подобрать.</p></details>
+    <details><summary>Как оплатить?</summary><p>Выбери свой банк в разделе «Оплата» — покажу инструкцию. Реквизиты пришлю в личке TikTok после согласования заказа.</p></details>
+    <details><summary>Как я узнаю, что мой заказ принят?</summary><p>После оплаты нажми «Я оплатил» — получишь код заказа и чек. Я сразу увижу его у себя.</p></details>
+  </div>
 </section>
 
 <section class="wrap reveal" id="contacts">
@@ -700,7 +689,9 @@ footer span{color:var(--pink)}
   <p style="margin-top:1rem">
     <button class="admin-trigger" id="adminTrigger">⚙️ Вход для администратора</button>
   </p>
-</footer><div class="modal-overlay" id="payModal">
+</footer>
+
+<div class="modal-overlay" id="payModal">
   <div class="modal">
     <div class="modal-head">
       <h3 id="payModalTitle">💳 Оплата</h3>
@@ -725,32 +716,16 @@ footer span{color:var(--pink)}
     </div>
     <form id="supportForm" autocomplete="off">
       <input type="hidden" id="sType" value="chat">
-      <div class="field">
-        <label for="sName">Твоё имя</label>
-        <input type="text" id="sName" maxlength="30" placeholder="Например: Даниил" required>
-      </div>
-      <div class="field">
-        <label for="sTikTok">Твой TikTok (ник)</label>
-        <input type="text" id="sTikTok" maxlength="50" placeholder="@xero4484" required>
-      </div>
-      <div class="field" id="sAmountField" style="display:none">
-        <label for="sAmount">Сумма оплаты (₽)</label>
-        <input type="text" id="sAmount" maxlength="20" placeholder="Например: 30">
-      </div>
+      <div class="field"><label for="sName">Твоё имя</label><input type="text" id="sName" maxlength="30" placeholder="Например: Даниил" required></div>
+      <div class="field"><label for="sTikTok">Твой TikTok (ник)</label><input type="text" id="sTikTok" maxlength="50" placeholder="@xero4484" required></div>
+      <div class="field" id="sAmountField" style="display:none"><label for="sAmount">Сумма оплаты (₽)</label><input type="text" id="sAmount" maxlength="20" placeholder="Например: 30"></div>
       <div class="field" id="sBankField" style="display:none">
         <label for="sBank">Каким банком оплатил</label>
         <select id="sBank">
-          <option>Сбербанк</option>
-          <option>Т-Банк</option>
-          <option>ВТБ</option>
-          <option>Альфа-Банк</option>
-          <option>Другой</option>
+          <option>Сбербанк</option><option>Т-Банк</option><option>ВТБ</option><option>Альфа-Банк</option><option>Другой</option>
         </select>
       </div>
-      <div class="field">
-        <label for="sText" id="sTextLabel">Твоё сообщение</label>
-        <textarea id="sText" maxlength="400" placeholder="Опиши ситуацию..." required></textarea>
-      </div>
+      <div class="field"><label for="sText" id="sTextLabel">Твоё сообщение</label><textarea id="sText" maxlength="400" placeholder="Опиши ситуацию..." required></textarea></div>
       <button class="btn" type="submit">Отправить</button>
       <div class="form-msg" id="supportMsg"></div>
     </form>
@@ -798,8 +773,10 @@ footer span{color:var(--pink)}
     </div>
     <div class="admin-content" id="adminContent"></div>
   </div>
-</div><script>
-/* ===== НАВИГАЦИЯ + СКРОЛЛ ===== */
+</div>
+
+<script>
+/* ===== НАВИГАЦИЯ ===== */
 const navbar = document.getElementById('navbar');
 addEventListener('scroll', ()=>{
   navbar.classList.toggle('scrolled', scrollY > 40);
@@ -850,20 +827,6 @@ const counterObserver = new IntersectionObserver(entries=>{
 },{threshold:.4});
 counters.forEach(c=>counterObserver.observe(c));
 
-/* ===== TILT КАРТОЧКИ ===== */
-document.querySelectorAll('.tilt').forEach(card=>{
-  card.addEventListener('mousemove', e=>{
-    const r = card.getBoundingClientRect();
-    const x = e.clientX - r.left, y = e.clientY - r.top;
-    const rx = ((y / r.height) - .5) * -12;
-    const ry = ((x / r.width) - .5) * 12;
-    card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(10px)`;
-    card.style.setProperty('--mx', (x/r.width*100)+'%');
-    card.style.setProperty('--my', (y/r.height*100)+'%');
-  });
-  card.addEventListener('mouseleave', ()=>{ card.style.transform = ''; });
-});
-
 /* ===== ЧАСТИЦЫ ===== */
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
@@ -911,11 +874,13 @@ draw();
 
 /* ===== ПАРАЛЛАКС HERO ===== */
 const heroInner = document.querySelector('.hero-inner');
-addEventListener('mousemove', e=>{
-  const x = (e.clientX/innerWidth - .5) * 18;
-  const y = (e.clientY/innerHeight - .5) * 18;
-  heroInner.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
-});
+if(heroInner){
+  addEventListener('mousemove', e=>{
+    const x = (e.clientX/innerWidth - .5) * 18;
+    const y = (e.clientY/innerHeight - .5) * 18;
+    heroInner.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+  });
+}
 
 /* ===== УТИЛИТЫ ===== */
 function escapeHtml(s){
@@ -949,20 +914,19 @@ document.querySelectorAll('.modal-overlay').forEach(m=>{
 });
 
 /* ===== ОТЗЫВЫ ===== */
-const REVIEWS_KEY = 'xero4484_reviews_v3';
+const REVIEWS_KEY = 'xero4484_reviews_v5';
 const DEFAULT_REVIEWS = [
-  { name:'Даниил', rating:5, text:'Заказал сложный эдит — получилось топ! Переходы плавные, всё по битам. Стоит своих денег, буду заказывать ещё.', date:'12.09.2025' },
-  { name:'Алина', rating:5, text:'Очень быстро сделал, всё как я хотела. Синхрон по музыке идеальный 🔥 Рекомендую!', date:'10.09.2025' },
-  { name:'Максим', rating:4, text:'Хороший эдит, всё сделал вовремя. Немного правок попросил — исправил быстро.', date:'08.09.2025' },
-  { name:'Кристина', rating:5, text:'Атмосфера в эдите просто вау! 3D-эффекты, свечение, цветокор — всё на месте. Спасибо!', date:'05.09.2025' },
-  { name:'Егор', rating:4, text:'Качество норм, цена вообще смешная. Эдиты неплохие получаются, стоят своих денег 👍', date:'03.09.2025' }
+  { name:'Даниил', rating:5, text:'Заказал сложный эдит — получилось топ! Переходы плавные, всё по битам.', date:'12.09.2025' },
+  { name:'Алина', rating:5, text:'Очень быстро сделал, всё как я хотела. Синхрон по музыке идеальный 🔥', date:'10.09.2025' },
+  { name:'Максим', rating:4, text:'Хороший эдит, всё сделал вовремя.', date:'08.09.2025' },
+  { name:'Кристина', rating:5, text:'Атмосфера просто вау! 3D-эффекты, свечение, цветокор — всё на месте.', date:'05.09.2025' },
+  { name:'Егор', rating:4, text:'Качество норм, цена вообще смешная. Стоит своих денег 👍', date:'03.09.2025' }
 ];
 let reviews = load(REVIEWS_KEY, DEFAULT_REVIEWS.slice());
 const listEl = document.getElementById('reviewsList');
 const avgRatingEl = document.getElementById('avgRating');
 const avgStarsEl = document.getElementById('avgStars');
 const countEl = document.getElementById('reviewsCount');
-
 function starsStr(n){ const f = Math.round(n); return '★'.repeat(f) + '☆'.repeat(5-f); }
 function renderReviews(){
   listEl.innerHTML = '';
@@ -1012,21 +976,22 @@ reviewForm.addEventListener('submit', e=>{
   renderReviews();
   reviewForm.reset(); chosenRating = 0;
   starPicker.querySelectorAll('span').forEach(s=>s.classList.remove('active'));
-  showMsg(reviewMsg,'Спасибо за отзыв! Он добавлен 💜','ok');
+  showMsg(reviewMsg,'Спасибо за отзыв! 💜','ok');
   listEl.scrollIntoView({behavior:'smooth', block:'start'});
 });
 
 /* ===== ФОРМА ЗАЯВКИ ===== */
-const ORDERS_KEY = 'xero4484_orders_v3';
+const ORDERS_KEY = 'xero4484_orders_v5';
 const orderForm = document.getElementById('orderForm');
 const orderMsg = document.getElementById('orderMsg');
+
 orderForm.addEventListener('submit', async (e)=>{
   e.preventDefault();
   const name = document.getElementById('oName').value.trim();
   const tiktok = document.getElementById('oTikTok').value.trim();
   const track = document.getElementById('oTrack').value.trim();
   const idea = document.getElementById('oIdea').value.trim();
-  if(!name || !tiktok || !track || !idea){ showMsg(orderMsg,'Заполни все поля, пожалуйста!','err'); return; }
+  if(!name || !tiktok || !track || !idea){ showMsg(orderMsg,'Заполни все поля!','err'); return; }
   try {
     const res = await fetch(orderForm.action, {
       method: 'POST',
@@ -1038,18 +1003,19 @@ orderForm.addEventListener('submit', async (e)=>{
       orders.unshift({ name, tiktok, track, idea, date: nowDate(), status:'pending', code: genOrderCode() });
       save(ORDERS_KEY, orders);
       orderForm.reset();
-      showMsg(orderMsg,'Заявка принята! Я напишу тебе в TikTok в ближайшее время. 💛','ok');
+      showMsg(orderMsg,'Заявка принята! 💛','ok');
       updateBadges();
     } else {
-      showMsg(orderMsg,'Ошибка отправки. Попробуй ещё раз.','err');
+      showMsg(orderMsg,'Ошибка отправки. Попробуй ещё.','err');
     }
   } catch(err){
-    showMsg(orderMsg,'Ошибка сети. Проверь интернет.','err');
+    showMsg(orderMsg,'Ошибка сети.','err');
   }
 });
-</script><script>
+
 /* ===== ПОДДЕРЖКА ===== */
-const SUPPORT_KEY = 'xero4484_support_v3';
+const SUPPORT_KEY = 'xero4484_support_v5';
+const REPLIES_KEY = 'xero4484_replies_v5';
 const supportForm = document.getElementById('supportForm');
 const supportMsg = document.getElementById('supportMsg');
 const sType = document.getElementById('sType');
@@ -1101,29 +1067,28 @@ supportForm.addEventListener('submit', e=>{
   if((type === 'refund' || type === 'paid') && !amount){ showMsg(supportMsg,'Укажи сумму','err'); return; }
 
   const list = load(SUPPORT_KEY, []);
+  const ticketId = 'T' + Date.now();
 
   if(type === 'paid'){
     const code = genOrderCode();
-    list.unshift({ type, name, tiktok, text, amount, bank, date: nowDate(), status: 'paid', code });
+    list.unshift({ id: ticketId, type, name, tiktok, text, amount, bank, date: nowDate(), status: 'paid', code });
     save(SUPPORT_KEY, list);
     showReceipt({ name, tiktok, amount, bank, code, date: nowDate() });
-    showMsg(supportMsg,'Спасибо! Оплата получена, приступаю к работе 💛','ok');
-    setTimeout(()=>{ closeModal('supportModal'); updateBadges(); }, 800);
+    showMsg(supportMsg,'Спасибо! Оплата получена 💛','ok');
+    setTimeout(()=>{ closeModal('supportModal'); updateBadges(); refreshUserReplies(); }, 800);
     return;
   }
-
   if(type === 'refund'){
-    list.unshift({ type, name, tiktok, text, amount, bank, date: nowDate(), status: 'pending' });
+    list.unshift({ id: ticketId, type, name, tiktok, text, amount, bank, date: nowDate(), status: 'pending' });
     save(SUPPORT_KEY, list);
-    showMsg(supportMsg,'Заявка на возврат отправлена. Я рассмотрю её и напишу тебе 💜','ok');
-    setTimeout(()=>{ closeModal('supportModal'); updateBadges(); }, 1800);
+    showMsg(supportMsg,'Заявка на возврат отправлена 💜','ok');
+    setTimeout(()=>{ closeModal('supportModal'); updateBadges(); refreshUserReplies(); }, 1800);
     return;
   }
-
-  list.unshift({ type, name, tiktok, text, amount:'', bank:'', date: nowDate(), status:'pending' });
+  list.unshift({ id: ticketId, type, name, tiktok, text, amount:'', bank:'', date: nowDate(), status:'pending' });
   save(SUPPORT_KEY, list);
-  showMsg(supportMsg,'🤖 Здравствуйте! Как только админ будет в сети — он вам поможет.','ok');
-  setTimeout(()=>{ closeModal('supportModal'); updateBadges(); }, 2500);
+  showMsg(supportMsg,'🤖 Как только админ будет в сети — он поможет.','ok');
+  setTimeout(()=>{ closeModal('supportModal'); updateBadges(); refreshUserReplies(); }, 2500);
 });
 
 /* ===== ЧЕК ===== */
@@ -1143,7 +1108,7 @@ function showReceipt(data){
       <div class="r-code-label">Код вашего заказа</div>
       <div class="r-code">${data.code}</div>
       <div class="r-status">✅ Оплата принята — скоро ваш эдит будет готов!</div>
-      <div class="r-thanks">Сохрани этот код — по нему я найду твой заказ 💜</div>
+      <div class="r-thanks">Сохрани код — по нему я найду твой заказ 💜</div>
     </div>
   `;
   openModal('receiptModal');
@@ -1152,7 +1117,6 @@ function showReceipt(data){
 /* ===== ОПЛАТА — БАНКИ ===== */
 const payModalTitle = document.getElementById('payModalTitle');
 const payModalBody = document.getElementById('payModalBody');
-
 document.querySelectorAll('.bank-btn').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     const bank = btn.dataset.bank;
@@ -1160,16 +1124,40 @@ document.querySelectorAll('.bank-btn').forEach(btn=>{
     payModalBody.innerHTML = `
       <div class="pay-step"><span class="num">1</span> Напиши мне в <b>TikTok @xero4484</b>.</div>
       <div class="pay-step"><span class="num">2</span> Скажи, что оплачиваешь через <b>${escapeHtml(bank)}</b>.</div>
-      <div class="pay-step"><span class="num">3</span> Я пришлю тебе <b>номер карты</b> в личку.</div>
-      <div class="pay-step"><span class="num">4</span> Переведи нужную сумму через ${escapeHtml(bank)}.</div>
-      <div class="pay-step"><span class="num">5</span> Нажми «Я оплатил» в техподдержке — получишь код заказа и чек.</div>
-      <p style="text-align:center;color:var(--muted);font-size:.9rem;margin-top:1rem">🔒 Номер карты виден только тебе и только в личке</p>
+      <div class="pay-step"><span class="num">3</span> Я пришлю <b>номер карты</b> в личку.</div>
+      <div class="pay-step"><span class="num">4</span> Переведи сумму через ${escapeHtml(bank)}.</div>
+      <div class="pay-step"><span class="num">5</span> Нажми «Я оплатил» — получишь код и чек.</div>
     `;
     openModal('payModal');
   });
 });
 
-/* ===== АДМИНКА ПО ПАРОЛЮ ===== */
+/* ===== ОТОБРАЖЕНИЕ ОТВЕТОВ ПОДДЕРЖКИ У КЛИЕНТА ===== */
+function refreshUserReplies(){
+  const replies = load(REPLIES_KEY, {});
+  const holder = document.getElementById('userReplies');
+  const keys = Object.keys(replies);
+  if(keys.length === 0){ holder.innerHTML = ''; return; }
+
+  let html = '<h3 class="title" style="font-size:1.4rem;margin-bottom:1rem">💬 Ответы поддержки</h3>';
+  keys.forEach(id=>{
+    const r = replies[id];
+    html += `
+      <div class="support-reply">
+        <div class="head">
+          <div class="ic">🛡</div>
+          <div class="who">Поддержка XERO4484</div>
+          <div class="when">${escapeHtml(r.date)}</div>
+        </div>
+        <div class="text">${escapeHtml(r.text)}</div>
+      </div>
+    `;
+  });
+  holder.innerHTML = html;
+}
+refreshUserReplies();
+
+/* ===== АДМИНКА ===== */
 const ADMIN_PASSWORD = 'ARSENIY1488';
 const adminTrigger = document.getElementById('adminTrigger');
 const passwordForm = document.getElementById('passwordForm');
@@ -1182,7 +1170,6 @@ adminTrigger.addEventListener('click', ()=>{
   passwordForm.reset();
   openModal('passwordModal');
 });
-
 passwordForm.addEventListener('submit', e=>{
   e.preventDefault();
   const val = document.getElementById('passwordInput').value;
@@ -1220,6 +1207,7 @@ function updateBadges(){
 
 function renderAdmin(tab){
   updateBadges();
+  const replies = load(REPLIES_KEY, {});
   let items = [];
   if(tab === 'orders') items = load(ORDERS_KEY, []);
   if(tab === 'support') items = load(SUPPORT_KEY, []).filter(s=>s.type==='chat');
@@ -1230,7 +1218,6 @@ function renderAdmin(tab){
     adminContent.innerHTML = '<div class="empty-orders"><span class="icon">📭</span>Пока пусто</div>';
     return;
   }
-
   adminContent.innerHTML = '';
   items.forEach((o, idx)=>{
     const initials = (o.name||'?').trim().charAt(0).toUpperCase();
@@ -1257,7 +1244,7 @@ function renderAdmin(tab){
         <div class="row"><span class="k">TikTok</span><span class="v">${escapeHtml(o.tiktok)}</span></div>
         <div class="row"><span class="k">Сумма</span><span class="v">${escapeHtml(o.amount)} ₽</span></div>
         <div class="row"><span class="k">Банк</span><span class="v">${escapeHtml(o.bank)}</span></div>
-        <div class="idea">⚠️ <b>${escapeHtml(o.tiktok)}</b> (${escapeHtml(o.name)}) хочет оформить возврат по причине: <b>${escapeHtml(o.text)}</b></div>
+        <div class="idea">⚠️ <b>${escapeHtml(o.tiktok)}</b> (${escapeHtml(o.name)}) хочет возврат: <b>${escapeHtml(o.text)}</b></div>
       `;
     } else if(tab === 'paid'){
       rows = `
@@ -1271,6 +1258,24 @@ function renderAdmin(tab){
       rows = `
         <div class="row"><span class="k">TikTok</span><span class="v">${escapeHtml(o.tiktok)}</span></div>
         <div class="idea">💬 ${escapeHtml(o.text)}</div>
+      `;
+    }
+
+    // Кнопка "Ответить" для оплат и поддержки
+    let replyBtn = '';
+    if((tab === 'paid' || tab === 'support') && o.id){
+      const hasReply = replies[o.id];
+      replyBtn = `
+        <div class="admin-actions">
+          <button class="reply" data-action="reply" data-id="${o.id}">
+            ${hasReply ? '✏️ Изменить ответ' : '💬 Ответить'}
+          </button>
+        </div>
+        ${hasReply ? `<div class="idea" style="border-color:var(--blue);margin-top:.6rem">🛡 <b>Ответ:</b> ${escapeHtml(replies[o.id].text)}</div>` : ''}
+        <div class="reply-box" id="replyBox_${o.id}">
+          <textarea id="replyText_${o.id}" maxlength="500" placeholder="Напиши ответ клиенту...">${hasReply ? escapeHtml(replies[o.id].text) : ''}</textarea>
+          <button data-action="send-reply" data-id="${o.id}">📤 Отправить</button>
+        </div>
       `;
     }
 
@@ -1293,13 +1298,36 @@ function renderAdmin(tab){
       </div>
       ${rows}
       ${actions}
+      ${replyBtn}
     `;
     adminContent.appendChild(div);
   });
 
+  // Обработчики кнопок
   adminContent.querySelectorAll('button[data-action]').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       const action = btn.dataset.action;
+
+      if(action === 'reply'){
+        const id = btn.dataset.id;
+        const box = document.getElementById('replyBox_' + id);
+        if(box) box.classList.toggle('show');
+        return;
+      }
+
+      if(action === 'send-reply'){
+        const id = btn.dataset.id;
+        const textEl = document.getElementById('replyText_' + id);
+        const text = textEl ? textEl.value.trim() : '';
+        if(!text){ alert('Напиши текст ответа'); return; }
+        const allReplies = load(REPLIES_KEY, {});
+        allReplies[id] = { text, date: nowDate() };
+        save(REPLIES_KEY, allReplies);
+        renderAdmin(currentTab);
+        return;
+      }
+
+      // Возвраты
       const idx = +btn.dataset.idx;
       const supportList = load(SUPPORT_KEY, []);
       const refunds = supportList.filter(s=>s.type==='refund');
@@ -1315,6 +1343,7 @@ function renderAdmin(tab){
 }
 
 updateBadges();
+refreshUserReplies();
 </script>
 </body>
-</html>
+      </html>

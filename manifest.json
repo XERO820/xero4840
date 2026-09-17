@@ -1,0 +1,19 @@
+{
+  "name": "XERO4484 — заказные эдиты",
+  "short_name": "XERO4484",
+  "description": "Заказные эдиты для TikTok. Лёгкие от 15 ₽, сложные от 30 ₽.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#05030f",
+  "theme_color": "#05030f",
+  "orientation": "portrait",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
